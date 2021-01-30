@@ -1,4 +1,4 @@
-import { Board } from "../../types/";
+import { Board } from "../../types/"; 
 export type MoveArr = [row: number, col: number][];
 export abstract class Piece {
   position: [number, number];
@@ -225,6 +225,95 @@ export class Vanguard extends Piece {
     super(row, col, side);
   }
   checkMoves(board: Board) {
-    return [];
+    const moves: MoveArr = [];
+    let firstMoveVert = [];
+    let firstMoveHor = [];
+    // do each direction
+
+    // up
+    for (let j = this.position[1] - 1; j >= 0; j--) {
+      const tile = board.arr[j][this.position[1]];
+      if (tile === null) {
+        firstMoveVert.push([j, this.position[1]]);
+      } else {
+        break;
+      }
+    }
+    // down
+    for (let i = this.position[1] + 1; i < board.size; i++) {
+      const tile = board.arr[i][this.position[1]];
+      if (tile === null) {
+        firstMoveVert.push([i, this.position[1]]);
+      } else {
+        break;
+      }
+    }
+    // left
+    for (let j = this.position[1] - 1; j >= 0; j--) {
+      const tile = board.arr[this.position[0]][j];
+      if (tile === null) {
+        firstMoveHor.push([this.position[0], j]);
+      } else {
+        break;
+      }
+    }
+    // right
+    for (let j = this.position[1] + 1; j < board.size; j++) {
+      const tile = board.arr[this.position[0]][j];
+      if (tile === null) {
+        firstMoveHor.push([this.position[0], j]);
+      } else {
+        break;
+      }
+    }
+
+    // second part of L
+
+        // up
+    for (let i=0;i<firstMoveHor.length;i++) {
+      for (let j = firstMoveHor[i][1] - 1; j >= 0; j--) {
+        const tile = board.arr[j][this.position[1]];
+        if (tile === null) {
+          moves.push([j, firstMoveHor[i][1]]);
+        } else {
+          break;
+        }
+      }
+    }
+    // down
+    for (let i=0;i<firstMoveHor.length;i++) {
+      for (let j = firstMoveHor[i][1] + 1; j < board.size; j++) {
+        const tile = board.arr[j][this.position[1]];
+        if (tile === null) {
+          moves.push([j, firstMoveHor[i][1]]);
+        } else {
+          break;
+        }
+      }
+    }
+    // left
+    for (let i=0;i<firstMoveVert.length;i++) {
+      for (let j = firstMoveVert[i][1] - 1; j >= 0; j--) {
+        const tile = board.arr[this.position[0]][j];
+        if (tile === null) {
+          moves.push([firstMoveHor[i][0], j]);
+        } else {
+          break;
+        }
+      }
+    }
+    // right
+    for (let i=0;i<firstMoveVert.length;i++) {
+      for (let j = firstMoveVert[i][1] + 1; j < board.size; j++) {
+        const tile = board.arr[this.position[0]][j];
+        if (tile === null) {
+          moves.push([firstMoveHor[i][0], j]);
+        } else {
+          break;
+        }
+      }
+    }
+
+    return moves;
   }
 }
