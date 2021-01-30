@@ -1,13 +1,15 @@
-import { Board } from "../../../types";
+import { Game } from "../../../types";
 // import {ReactComponent as PawnSVG} from '../Assets/';
-export default function BoardDisp({ board }: { board: Board }) {
+export default function BoardDisp({ game }: { game: Game }) {
   const clickHandlerCreator = (row: number, col: number) => () => {
-    const piece = board.arr[row][col];
-    // piece.checkMoves() -> [number, number] []
+    const piece = game.board.arr[row][col];
+    if (piece === null) return;
+    const moves = piece.checkMoves(game.board);
+    moves.forEach((move) => {});
   };
   return (
     <>
-      {board.arr.map((row, i) => (
+      {game.board.arr.map((row, i) => (
         <div className="row" key={`${i}`}>
           {row.map((col, j) => (
             <div
