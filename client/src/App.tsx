@@ -11,15 +11,13 @@ import {
 
 export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <BrowserRounter>
-          <Route exact path="/" component={HomeScreen} />
-          <Route exact path="/hostjoin" component={HostJoinScreen} />
-          <Route exact path="/waiting" component={WaitingScreen} />
-          <Route exact path="/game" component={GameScreen} />
-        </BrowserRounter>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Route exact path="/" component={HomeScreen} />
+        <Route exact path="/hostjoin" component={HostJoinScreen} />
+        <Route exact path="/waiting" component={WaitingScreen} />
+        <Route exact path="/game" component={GameScreen} />
+      </BrowserRouter>
+    </>
   );
 }
