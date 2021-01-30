@@ -64,7 +64,7 @@ io.on("connection", (socket: Socket) => {
     const game = games[code];
     if (game.started) return fn({ ok: false, message: "game started" });
     socket.join(code);
-    fn({ ok: true, message: "joined room" });
+    fn({ ok: true, message: "joined room", game });
   });
   socket.on("start", (fn) => {
     const code = getCode(socket);
