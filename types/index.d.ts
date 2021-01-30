@@ -1,9 +1,10 @@
-import { Board } from "./board";
+import { Board, BoardSize } from "./board";
 export interface Lobby {
   started: boolean;
   whiteTurn: boolean; // is host white or black
   whiteCol: number[];
   blackCol: number[];
+  size: BoardSize;
 }
 export interface Game extends Lobby {
   board: Board;
@@ -18,4 +19,5 @@ export interface Move {
 // vanguard positions
 export interface Settings {
   columns: number[];
+  size: BoardSize;
 }
