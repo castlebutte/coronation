@@ -43,3 +43,30 @@ export class Pawn extends Piece {
     return [];
   }
 }
+
+export class King extends Piece {
+  constructor(row: number, col: number, side: boolean) {
+    super(row, col, side);
+  }
+  checkMoves(board: Board) {
+    return [];
+  }
+}
+
+export class Queen extends Piece {
+  constructor(row: number, col: number, side: boolean) {
+    super(row, col, side);
+  }
+  checkMoves(board: Board) {
+    return [];
+  }
+}
+
+export class Vanguard extends Piece {
+  constructor(row: number, col: number, side: boolean) {
+    super(row, col, side);
+  }
+  checkMoves(board: Board) {
+    return [];
+  }
+}
