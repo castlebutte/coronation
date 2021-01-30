@@ -9,27 +9,23 @@ export type PieceType =
   | "king"
   | "vanguard";
 
-export function createPiece(
-  row: number,
-  col: number,
-  side: boolean,
-  type: PieceType
-) {
+export function createPiece(piece: Piece) {
+  const { position: pos, side, type } = piece;
   switch (type) {
     case "bishop":
-      return new Bishop(row, col, side);
+      return new Bishop(pos[0], pos[1], side);
     case "rook":
-      return new Rook(row, col, side);
+      return new Rook(pos[0], pos[1], side);
     case "queen":
-      return new Queen(row, col, side);
+      return new Queen(pos[0], pos[1], side);
     case "king":
-      return new King(row, col, side);
+      return new King(pos[0], pos[1], side);
     case "pawn":
-      return new Pawn(row, col, side);
+      return new Pawn(pos[0], pos[1], side);
     case "vanguard":
-      return new Vanguard(row, col, side);
+      return new Vanguard(pos[0], pos[1], side);
     case "knight":
-      return new Knight(row, col, side);
+      return new Knight(pos[0], pos[1], side);
   }
 }
 export class Piece {
