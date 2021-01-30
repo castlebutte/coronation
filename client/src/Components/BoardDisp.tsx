@@ -1,28 +1,29 @@
 import { Game } from "../../../types";
-import { Board } from "../../../types";
+import { createPiece } from "../Pieces";
 
+import { ReactComponent as BlackBishop } from "../Assets/gamepieces/black_bishop.svg";
+import { ReactComponent as BlackKing } from "../Assets/gamepieces/black_king.svg";
+import { ReactComponent as BlackKnight } from "../Assets/gamepieces/black_knight.svg";
+import { ReactComponent as BlackPawn } from "../Assets/gamepieces/black_pawn.svg";
+import { ReactComponent as BlackQueen } from "../Assets/gamepieces/black_queen.svg";
+import { ReactComponent as BlackRook } from "../Assets/gamepieces/black_rook.svg";
+import { ReactComponent as BlackVanguard } from "../Assets/gamepieces/black_vanguard.svg";
+import { ReactComponent as WhiteBishop } from "../Assets/gamepieces/white_bishop.svg";
+import { ReactComponent as WhiteKing } from "../Assets/gamepieces/white_king.svg";
+import { ReactComponent as WhiteKnight } from "../Assets/gamepieces/white_knight.svg";
+import { ReactComponent as WhitePawn } from "../Assets/gamepieces/white_pawn.svg";
+import { ReactComponent as WhiteQueen } from "../Assets/gamepieces/white_queen.svg";
+import { ReactComponent as WhiteRook } from "../Assets/gamepieces/white_rook.svg";
+import { ReactComponent as WhiteVanguard } from "../Assets/gamepieces/white_vanguard.svg";
 
-import {ReactComponent as BlackBishop} from '../Assets/gamepieces/black_bishop.svg';
-import {ReactComponent as BlackKing} from '../Assets/gamepieces/black_king.svg';
-import {ReactComponent as BlackKnight} from '../Assets/gamepieces/black_knight.svg';
-import {ReactComponent as BlackPawn} from '../Assets/gamepieces/black_pawn.svg';
-import {ReactComponent as BlackQueen} from '../Assets/gamepieces/black_queen.svg';
-import {ReactComponent as BlackRook} from '../Assets/gamepieces/black_rook.svg';
-import {ReactComponent as BlackVanguard} from '../Assets/gamepieces/black_vanguard.svg';
-import {ReactComponent as WhiteBishop} from '../Assets/gamepieces/white_bishop.svg';
-import {ReactComponent as WhiteKing} from '../Assets/gamepieces/white_king.svg';
-import {ReactComponent as WhiteKnight} from '../Assets/gamepieces/white_knight.svg';
-import {ReactComponent as WhitePawn} from '../Assets/gamepieces/white_pawn.svg';
-import {ReactComponent as WhiteQueen} from '../Assets/gamepieces/white_queen.svg';
-import {ReactComponent as WhiteRook} from '../Assets/gamepieces/white_rook.svg';
-import {ReactComponent as WhiteVanguard} from '../Assets/gamepieces/white_vanguard.svg';
-
-
-export default function BoardDisp({ game }: { game: Board }) {
+export default function BoardDisp({ game }: { game: Game }) {
   const clickHandlerCreator = (row: number, col: number) => () => {
-    const piece = game.board.arr[row][col];
+    let piece = game.board.arr[row][col];
     if (piece === null) return;
+    piece = createPiece(piece);
+    console.log(piece);
     const moves = piece.checkMoves(game.board);
+    console.log(moves);
     moves.forEach((move) => {});
   };
   return (
@@ -34,38 +35,38 @@ export default function BoardDisp({ game }: { game: Board }) {
               className={(i + j) % 2 ? "black" : "col"}
               key={`${i}-${j}`}
               onClick={clickHandlerCreator(i, j)}
-            > 
-              { i < 4 ? (col === null ? null : col.type === "pawn" ? (
-                <BlackPawn/>
+            >
+              {!col?.side ? (
+                col === null ? null : col.type === "pawn" ? (
+                  <BlackPawn />
+                ) : col.type === "knight" ? (
+                  <BlackKnight />
+                ) : col.type === "queen" ? (
+                  <BlackQueen />
+                ) : col.type === "king" ? (
+                  <BlackKing />
+                ) : col.type === "bishop" ? (
+                  <BlackBishop />
+                ) : col.type === "rook" ? (
+                  <BlackRook />
+                ) : col.type === "vanguard" ? (
+                  <BlackVanguard />
+                ) : null
+              ) : col === null ? null : col.type === "pawn" ? (
+                <WhitePawn />
               ) : col.type === "knight" ? (
-                <BlackKnight/>
+                <WhiteKnight />
               ) : col.type === "queen" ? (
-                <BlackQueen/>
+                <WhiteQueen />
               ) : col.type === "king" ? (
-                <BlackKing/>
+                <WhiteKing />
               ) : col.type === "bishop" ? (
-                <BlackBishop/>
+                <WhiteBishop />
               ) : col.type === "rook" ? (
-                <BlackRook/>
+                <WhiteRook />
               ) : col.type === "vanguard" ? (
-                <BlackVanguard/>
-              ) : null) :
-              (col === null ? null : col.type === "pawn" ? (
-                <WhitePawn/>
-              ) : col.type === "knight" ? (
-                <WhiteKnight/>
-              ) : col.type === "queen" ? (
-                <WhiteQueen/>
-              ) : col.type === "king" ? (
-                <WhiteKing/>
-              ) : col.type === "bishop" ? (
-                <WhiteBishop/>
-              ) : col.type === "rook" ? (
-                <WhiteRook/>
-              ) : col.type === "vanguard" ? (
-                <WhiteVanguard/>
-              ) : null)
-            }
+                <WhiteVanguard />
+              ) : null}
             </div>
           ))}
         </div>

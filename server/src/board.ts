@@ -40,8 +40,8 @@ export const newBoard = (
   for (let i = 0; i < sizeBoard; ++i) {
     blackPawns.push(
       blackCol.includes(i)
-        ? new Vanguard(sizeBoard - 2, i, true)
-        : new Pawn(sizeBoard - 2, i, true)
+        ? new Vanguard(sizeBoard - 2, i, false)
+        : new Pawn(sizeBoard - 2, i, false)
     );
   }
   if (sizeBoard == 10) {
@@ -99,18 +99,18 @@ export const newBoard = (
         ...createArray(8, createArray(12, null)),
         blackPawns,
         [
-          new Rook(0, 0, true),
-          new Knight(0, 1, true),
-          new Knight(0, 2, true),
-          new Bishop(0, 3, true),
-          new Bishop(0, 4, true),
-          new Queen(0, 5, true),
-          new King(0, 6, true),
-          new Bishop(0, 7, true),
-          new Bishop(0, 8, true),
-          new Knight(0, 9, true),
-          new Knight(0, 10, true),
-          new Rook(0, 11, true),
+          new Rook(0, 0, false),
+          new Knight(0, 1, false),
+          new Knight(0, 2, false),
+          new Bishop(0, 3, false),
+          new Bishop(0, 4, false),
+          new Queen(0, 5, false),
+          new King(0, 6, false),
+          new Bishop(0, 7, false),
+          new Bishop(0, 8, false),
+          new Knight(0, 9, false),
+          new Knight(0, 10, false),
+          new Rook(0, 11, false),
         ],
       ],
     };
@@ -218,14 +218,14 @@ export const newBoard = (
         ...createArray(4, createArray(8, null)),
         blackPawns,
         [
-          new Rook(7, 0, true),
-          new Knight(7, 1, true),
-          new Bishop(7, 2, true),
-          new Queen(7, 3, true),
-          new King(7, 4, true),
-          new Bishop(7, 5, true),
-          new Knight(7, 6, true),
-          new Rook(7, 7, true),
+          new Rook(7, 0, false),
+          new Knight(7, 1, false),
+          new Bishop(7, 2, false),
+          new Queen(7, 3, false),
+          new King(7, 4, false),
+          new Bishop(7, 5, false),
+          new Knight(7, 6, false),
+          new Rook(7, 7, false),
         ],
       ],
     };

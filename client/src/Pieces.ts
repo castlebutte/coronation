@@ -8,7 +8,31 @@ export type PieceType =
   | "queen"
   | "king"
   | "vanguard";
-export abstract class Piece {
+
+export function createPiece(
+  row: number,
+  col: number,
+  side: boolean,
+  type: PieceType
+) {
+  switch (type) {
+    case "bishop":
+      return new Bishop(row, col, side);
+    case "rook":
+      return new Rook(row, col, side);
+    case "queen":
+      return new Queen(row, col, side);
+    case "king":
+      return new King(row, col, side);
+    case "pawn":
+      return new Pawn(row, col, side);
+    case "vanguard":
+      return new Vanguard(row, col, side);
+    case "knight":
+      return new Knight(row, col, side);
+  }
+}
+export class Piece {
   type: PieceType;
   position: [number, number];
   side: boolean;
@@ -20,7 +44,9 @@ export abstract class Piece {
   move(row: number, col: number) {
     this.position = [row, col];
   }
-  abstract checkMoves(board: Board): MoveArr;
+  checkMoves(board: Board): MoveArr {
+    return [];
+  }
 }
 export class Rook extends Piece {
   constructor(row: number, col: number, side: boolean) {
