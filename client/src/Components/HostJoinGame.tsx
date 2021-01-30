@@ -2,11 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import HomeScreen from './Components/HomeScreen';
-
-
-
-export default function App() {
+export default function HostJoinScreen() {
   return (
     <div className="App">
       <header className="App-header">
@@ -19,7 +15,7 @@ export default function App() {
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
-
+          
         >
           Learn React
         </a>
