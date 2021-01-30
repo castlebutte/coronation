@@ -9,9 +9,12 @@
   background-color: black;
 }
 .bigText {
-  font-family: "Avenir-Light";
-  font-size: 100;
-  color: "white";
+  font-family: "Segoe UI";
+  font-size: 100px;
+  font-weight: unset;
+  color: white;
+  flex: 1;
+  margin-left: 1%;
 }
 .smallText {
   font-family: "Georgia";
@@ -19,13 +22,10 @@
   color: "white";
   text-align: "center";
 }
-.continueText {
-  font-family: "Avenir-Light";
-  font-size: 14;
-  color: "#892cdc";
-}
-.corgiBox {
+.titleBox {
   display: flex;
+  flex: 3;
+  align-items: center;
   align-self: center;
   border-width: 1;
   border-color: white;
@@ -34,8 +34,32 @@
   flex-direction: row;
 }
 .startBox {
-  display: flex;
+  border-width: 11px;
+  border-color: white;
+  width: 100%;
+  height: 100%;
+}
+.startButton {
+  color: white;
+  flex-direction: column;
+  justify-self: start;
+  font-family: "Segoe UI";
+  text-decoration: unset;
+  background-color: #f4b670;
   padding: 1%;
+  margin-bottom: 1%;
   width: 30%;
-  align-content: center;
+  height: 5%;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 40px;
+}
+.teamBox {
+  display: flex;
+  flex: 1;
+  flex-direction: column-reverse;
+  justify-self: flex-start;
+  align-items: center;
+  height: 10px;
+  margin-bottom: 1%;
 }
