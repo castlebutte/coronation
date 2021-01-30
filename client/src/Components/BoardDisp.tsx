@@ -1,8 +1,8 @@
 import { Board } from "../../../types";
-export default function Board({ arr }: Board) {
+export default function BoardDisp({ board }: { board: Board }) {
   return (
     <>
-      {arr.map((row, i) => (
+      {board.arr.map((row, i) => (
         <div className="row" key={`${i}`}>
           {row.map((col, j) => (
             <div className="col" key={`${i}-${j}`}>
