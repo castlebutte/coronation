@@ -13,9 +13,8 @@ export default function GameScreen({
   return (
     <div className="screen">
       <div className="boardBox">
-        <BoardDisp board={game.board} />
+        <BoardDisp game={game} />
       </div>
     </div>
   );
 }
- 
