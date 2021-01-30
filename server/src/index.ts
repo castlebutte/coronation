@@ -1,5 +1,6 @@
 import Express from "express";
 import { Socket, Server } from "socket.io";
+import { Move } from "../../types";
 
 const app = Express();
 const router = Express.Router();
@@ -20,4 +21,5 @@ const io = new Server(server, {
 
 io.on("connection", (socket: Socket) => {
   socket.on("start", () => {});
+  socket.on("move", (move: Move) => {});
 });
