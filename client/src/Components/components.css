@@ -5,21 +5,36 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  justify-content: center;
+  background-color: black;
+}
+.hostJoinScreen {
+  display: flex;
+  flex-direction: column;
+  justify-self: flex-start;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
   background-color: black;
 }
 .bigText {
   font-family: "Segoe UI";
   font-size: 100px;
-  font-weight: unset;
+  font-weight: lighter;
   color: white;
   flex: 1;
   margin-left: 1%;
 }
+.mediumText {
+  font-family: "Segoe UI";
+  font-size: 50px;
+  font-weight: lighter;
+  color: white;
+}
 .smallText {
-  font-family: "Georgia";
-  font-size: 18;
-  color: "white";
+  font-family: "Segoe UI";
+  font-size: 18px;
+  color: white;
   text-align: "center";
 }
 .titleBox {
@@ -32,9 +47,6 @@
   align-content: center;
   justify-content: center;
   flex-direction: row;
-}
-.startBox {
-  /* align-self: center; */
 }
 .startButton {
   color: white;
@@ -51,6 +63,10 @@
   vertical-align: middle;
   border-radius: 40px;
 }
+.buttonBox {
+  display: flex;
+  width: 250px;
+}
 .teamBox {
   display: flex;
   flex: 1;
@@ -59,4 +75,12 @@
   align-items: center;
   height: 10px;
   margin-bottom: 1%;
+}
+.inputField {
+  width: 50%;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  padding: 1%;
 }
