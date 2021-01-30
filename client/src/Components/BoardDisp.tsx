@@ -11,7 +11,7 @@ export default function BoardDisp({ board }: { board: Board }) {
         <div className="row" key={`${i}`}>
           {row.map((col, j) => (
             <div
-              className={(i + j) % 2 ? "col" : "black"}
+              className={(i + j) % 2 ? "black" : "col"}
               key={`${i}-${j}`}
               onClick={clickHandlerCreator(i, j)}
             >
