@@ -19,6 +19,7 @@ function createRoom() {
   while (gameExists(code)) code = randCode();
 
   games[code] = {
+    code,
     started: false,
     whiteTurn: true,
     whiteCol: [],

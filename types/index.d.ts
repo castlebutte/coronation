@@ -42,6 +42,7 @@ export interface Board {
   arr: (Piece | null)[][];
 }
 export interface Lobby {
+  code: string;
   started: boolean;
   whiteTurn: boolean; // is host white or black
   whiteCol: number[];

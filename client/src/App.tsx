@@ -1,4 +1,4 @@
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 
 import HomeScreen from "./Components/HomeScreen";
@@ -9,10 +9,12 @@ import GameScreen from "./Components/GameScreen";
 export default function App() {
   return (
     <BrowserRouter>
-      <Route exact path="/" component={HomeScreen} />
-      <Route exact path="/hostjoin" component={HostJoinScreen} />
-      <Route exact path="/waiting" component={WaitingScreen} />
-      <Route exact path="/game" component={GameScreen} />
+      <Switch>
+        <Route exact path="/" component={HomeScreen} />
+        <Route exact path="/hostjoin" component={HostJoinScreen} />
+        <Route exact path="/waiting" component={WaitingScreen} />
+        <Route exact path="/game" component={GameScreen} />
+      </Switch>
     </BrowserRouter>
   );
 }
