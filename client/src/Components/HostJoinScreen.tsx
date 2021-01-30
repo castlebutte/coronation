@@ -1,16 +1,20 @@
 import React from "react";
 import "./components.css";
 
+import { ReactComponent as Host } from "../Assets/host_button.svg";
+import { ReactComponent as Join } from "../Assets/join_button.svg";
+
 export default function HostJoinScreen() {
   return (
-    <div className="Screen">
-      <header className="CorgiBox">
-        <img className="CorgiBox" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a>Learn React</a>
-      </header>
+    <div className="hostJoinScreen">
+      <h1 className="mediumText">Host Game</h1>
+      <a className="buttonBox" href="/waiting">
+        <Host />
+      </a>
+      <h1 className="mediumText">Join Game</h1>
+      <a className="buttonBox" href="/waiting">
+        <Join />
+      </a>
     </div>
   );
 }
