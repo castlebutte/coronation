@@ -1,5 +1,22 @@
 import { Board } from "../../../types";
-// import {ReactComponent as PawnSVG} from '../Assets/';
+
+import {ReactComponent as BlackBishop} from '../Assets/gamepieces/black_bishop.svg';
+import {ReactComponent as BlackKing} from '../Assets/gamepieces/black_king.svg';
+import {ReactComponent as BlackKnight} from '../Assets/gamepieces/black_knight.svg';
+import {ReactComponent as BlackPawn} from '../Assets/gamepieces/black_pawn.svg';
+import {ReactComponent as BlackQueen} from '../Assets/gamepieces/black_queen.svg';
+import {ReactComponent as BlackRook} from '../Assets/gamepieces/black_rook.svg';
+import {ReactComponent as BlackVanguard} from '../Assets/gamepieces/black_vanguard.svg';
+import {ReactComponent as WhiteBishop} from '../Assets/gamepieces/white_bishop.svg';
+import {ReactComponent as WhiteKing} from '../Assets/gamepieces/white_king.svg';
+import {ReactComponent as WhiteKnight} from '../Assets/gamepieces/white_knight.svg';
+import {ReactComponent as WhitePawn} from '../Assets/gamepieces/white_pawn.svg';
+import {ReactComponent as WhiteQueen} from '../Assets/gamepieces/white_queen.svg';
+import {ReactComponent as WhiteRook} from '../Assets/gamepieces/white_rook.svg';
+import {ReactComponent as WhiteVanguard} from '../Assets/gamepieces/white_vanguard.svg';
+
+
+
 export default function BoardDisp({ board }: { board: Board }) {
   const clickHandlerCreator = (row: number, col: number) => () => {
     const piece = board.arr[row][col];
@@ -16,19 +33,19 @@ export default function BoardDisp({ board }: { board: Board }) {
               onClick={clickHandlerCreator(i, j)}
             >
               {col === null ? null : col.type === "pawn" ? (
-                <>Pawn</>
+                <BlackPawn/>
               ) : col.type === "knight" ? (
-                <>Knight</>
+                <BlackKnight/>
               ) : col.type === "queen" ? (
-                <>Queen</>
+                <BlackQueen/>
               ) : col.type === "king" ? (
-                <>King</>
+                <BlackKing/>
               ) : col.type === "bishop" ? (
-                <>Bishop</>
+                <BlackBishop/>
               ) : col.type === "rook" ? (
-                <>Rook</>
+                <BlackRook/>
               ) : col.type === "vanguard" ? (
-                <>Vanguard</>
+                <BlackVanguard/>
               ) : null}
             </div>
           ))}
