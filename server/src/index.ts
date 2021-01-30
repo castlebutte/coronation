@@ -4,18 +4,18 @@ import { Socket, Server } from "socket.io";
 const app = Express();
 const router = Express.Router();
 
-const port = 5001;
+const port = 5002;
 
 router.get("/", (_, res) => {
   res.send("Hello, thyck bois and gorls of the world!");
 });
 
-app.use("/h2h", router);
+app.use("/chess", router);
 
 const server = app.listen(port, () => console.log("Listening on port " + port));
 const io = new Server(server, {
   cors: { origin: "*", methods: ["GET", "POST"] },
-  path: "/h2h",
+  path: "/chess",
 });
 
 io.on("connection", (socket: Socket) => {
