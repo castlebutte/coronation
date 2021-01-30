@@ -102,7 +102,22 @@ export class King extends Piece {
     super(row, col, side);
   }
   checkMoves(board: Board) {
-    return [];
+    // check all directions
+    const options = [
+      [this.position[0] - 1, this.position[1] - 1],
+      [this.position[0] - 1, this.position[1]],
+      [this.position[0] - 1, this.position[1] + 1],
+      [this.position[0], this.position[1] - 1],
+      [this.position[0], this.position[1] + 1],
+      [this.position[0] + 1, this.position[1] - 1],
+      [this.position[0] + 1, this.position[1]],
+      [this.position[0] + 1, this.position[1] + 1],
+    ];
+    const moves: MoveArr = options.map((move) => {
+      const tile = board.arr[move[0]][move[1]];
+      if (tile === null || tile.side !== this.side) return [move[0], move[1]];
+    });
+    return moves;
   }
 }
 
