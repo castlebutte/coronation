@@ -1,13 +1,13 @@
 import Express from "express";
 import { Socket, Server } from "socket.io";
-import { Game, Move } from "../../types";
+import { Game, Lobby, Move } from "../../types";
 import { new8x8board } from "../../types/board";
 
 const app = Express();
 const router = Express.Router();
 
 const port = 5002;
-const games: { [T: string]: Game } = {};
+const games: { [T: string]: Lobby } = {};
 
 function randCode() {
   return (Math.floor(Math.random() * 90000) + 10000).toString();
@@ -26,8 +26,8 @@ function createRoom() {
 }
 
 function makeMove(code: string, move: Move) {
-  const game = games[code];
-  const piece = game.board?.pieces.find(
+  const game = games[code] as Game;
+  const piece = game.board.pieces.find(
     (piece) =>
       piece.position[0] === move.oldPos[0] &&
       piece.position[1] === move.oldPos[1]
@@ -63,6 +63,7 @@ io.on("connection", (socket: Socket) => {
     socket.join(code);
     fn({ ok: true, messsage: "joined room" });
   });
+  socket.on("setting", (setting) => {});
   socket.on("move", (move: Move) => {
     const code = getCode(socket);
     makeMove(code, move);

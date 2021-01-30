@@ -1,8 +1,11 @@
 import { Board } from "./board";
-export interface Game {
+export interface Lobby {
   started: boolean;
-  whiteTurn: boolean;
-  board?: Board;
+  whiteTurn: boolean; // is host white or black
+}
+export interface Game extends Lobby {
+  board: Board;
+  // white turn becomes whether it's white's turn or not
 }
 
 export interface Move {

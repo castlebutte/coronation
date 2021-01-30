@@ -1,0 +1,30 @@
+
+    .Screen {
+      padding: "5%";
+      alignItems: "center";
+      justifyContent: "center";
+      flex: 1;
+      backgroundColor: "black";
+      height: "100%";
+      width: "100%";
+    }
+    .BigText {
+      fontFamily: "Georgia";
+      fontSize: 30;
+      color: "white";
+    }
+    .SmallText {
+      fontFamily: "Georgia";
+      fontSize: 18;
+      color: "white";
+      textAlign: "center";
+    }
+    .ContinueText {
+      fontFamily: "Avenir-Light";
+      fontSize: 14;
+      color: "#892cdc";
+    }
+    .CorgiBox {
+      alignItems: "center";
+      marginBottom: "15%";
+    }
