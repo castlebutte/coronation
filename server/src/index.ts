@@ -29,11 +29,7 @@ function createRoom() {
 
 function makeMove(code: string, move: Move) {
   const game = games[code] as Game;
-  const piece = game.board.pieces.find(
-    (piece) =>
-      piece.position[0] === move.oldPos[0] &&
-      piece.position[1] === move.oldPos[1]
-  );
+  const piece = game.board.arr[move.oldPos[0]][move.oldPos[1]];
   piece?.move(move.oldPos[0], move.oldPos[1]);
 }
 function getCode(socket: Socket) {

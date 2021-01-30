@@ -16,6 +16,13 @@ export class Rook extends Piece {
     super(row, col, side);
   }
   checkMoves(board: Board) {
+    // do each direction
+    // up
+    for (let i = this.position[1]; i >= 0; i--) {
+      if (board.arr[this.position[0]][i]) {
+      }
+    }
+
     return [];
   }
 }
