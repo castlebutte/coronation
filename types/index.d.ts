@@ -1,8 +1,17 @@
+export type PieceType =
+  | "rook"
+  | "knight"
+  | "bishop"
+  | "pawn"
+  | "queen"
+  | "king"
+  | "vanguard";
 export type MoveArr = [row: number, col: number][];
 export abstract class Piece {
+  type: PieceType;
   position: [number, number];
   side: boolean;
-  constructor(row: number, col: number, side: boolean);
+  constructor(row: number, col: number, side: boolean, type: PieceType);
   move(row: number, col: number): void;
   abstract checkMoves(board: Board): MoveArr;
 }

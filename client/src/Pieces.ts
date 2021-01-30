@@ -1,11 +1,21 @@
 import { Board } from "../../types/";
 export type MoveArr = [row: number, col: number][];
+export type PieceType =
+  | "rook"
+  | "knight"
+  | "bishop"
+  | "pawn"
+  | "queen"
+  | "king"
+  | "vanguard";
 export abstract class Piece {
+  type: PieceType;
   position: [number, number];
   side: boolean;
-  constructor(row: number, col: number, side: boolean) {
+  constructor(row: number, col: number, side: boolean, type: PieceType) {
     this.position = [row, col];
     this.side = side;
+    this.type = type;
   }
   move(row: number, col: number) {
     this.position = [row, col];
@@ -14,7 +24,7 @@ export abstract class Piece {
 }
 export class Rook extends Piece {
   constructor(row: number, col: number, side: boolean) {
-    super(row, col, side);
+    super(row, col, side, "rook");
   }
   checkMoves(board: Board) {
     const moves: MoveArr = [];
@@ -74,7 +84,7 @@ export class Rook extends Piece {
 }
 export class Knight extends Piece {
   constructor(row: number, col: number, side: boolean) {
-    super(row, col, side);
+    super(row, col, side, "knight");
   }
   checkMoves(board: Board) {
     // check all directions
@@ -115,7 +125,7 @@ export class Knight extends Piece {
 }
 export class Bishop extends Piece {
   constructor(row: number, col: number, side: boolean) {
-    super(row, col, side);
+    super(row, col, side, "bishop");
   }
   bishopBounds(i: number, size: number) {
     return (
@@ -161,7 +171,7 @@ export class Bishop extends Piece {
 }
 export class Pawn extends Piece {
   constructor(row: number, col: number, side: boolean) {
-    super(row, col, side);
+    super(row, col, side, "pawn");
   }
   checkMoves(board: Board) {
     // check all directions
@@ -189,7 +199,7 @@ export class Pawn extends Piece {
 
 export class King extends Piece {
   constructor(row: number, col: number, side: boolean) {
-    super(row, col, side);
+    super(row, col, side, "king");
   }
   checkMoves(board: Board) {
     // check all directions
@@ -213,7 +223,7 @@ export class King extends Piece {
 
 export class Queen extends Piece {
   constructor(row: number, col: number, side: boolean) {
-    super(row, col, side);
+    super(row, col, side, "queen");
   }
   checkMoves(board: Board) {
     // bruh
@@ -223,7 +233,7 @@ export class Queen extends Piece {
 
 export class Vanguard extends Piece {
   constructor(row: number, col: number, side: boolean) {
-    super(row, col, side);
+    super(row, col, side, "vanguard");
   }
   checkMoves(board: Board) {
     const moves: MoveArr = [];

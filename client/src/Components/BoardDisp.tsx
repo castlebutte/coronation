@@ -1,4 +1,5 @@
 import { Board } from "../../../types";
+// import {ReactComponent as PawnSVG} from '../Assets/';
 export default function BoardDisp({ board }: { board: Board }) {
   const clickHandlerCreator = (row: number, col: number) => () => {
     const piece = board.arr[row][col];
@@ -14,8 +15,21 @@ export default function BoardDisp({ board }: { board: Board }) {
               key={`${i}-${j}`}
               onClick={clickHandlerCreator(i, j)}
             >
-              {/* Piece or null */}
-              {JSON.stringify(col)}
+              {col === null ? null : col.type === "pawn" ? (
+                <>Pawn</>
+              ) : col.type === "knight" ? (
+                <>Knight</>
+              ) : col.type === "queen" ? (
+                <>Queen</>
+              ) : col.type === "king" ? (
+                <>King</>
+              ) : col.type === "bishop" ? (
+                <>Bishop</>
+              ) : col.type === "rook" ? (
+                <>Rook</>
+              ) : col.type === "vanguard" ? (
+                <>Vanguard</>
+              ) : null}
             </div>
           ))}
         </div>
