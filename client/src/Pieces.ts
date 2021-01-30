@@ -1,4 +1,4 @@
-import { Board } from "../../types/board";
+import { Board } from "../../types/";
 export type MoveArr = [row: number, col: number][];
 export abstract class Piece {
   position: [number, number];
@@ -79,35 +79,36 @@ export class Knight extends Piece {
   checkMoves(board: Board) {
     // check all directions
     //i apologize for this array lmao
+    const [row, col] = this.position;
     const options: MoveArr = [
-      [this.position[0] - 2, this.position[1] - 2],
-      [this.position[0] - 2, this.position[1]],
-      [this.position[0] - 2, this.position[1] + 2],
-      [this.position[0], this.position[1] - 2],
-      [this.position[0], this.position[1] + 2],
-      [this.position[0] + 2, this.position[1] - 2],
-      [this.position[0] + 2, this.position[1]],
-      [this.position[0] + 2, this.position[1] + 2],
-      [this.position[0] - 3, this.position[1] - 3],
-      [this.position[0] - 3, this.position[1]],
-      [this.position[0] - 3, this.position[1] + 3],
-      [this.position[0], this.position[1] - 3],
-      [this.position[0], this.position[1] + 3],
-      [this.position[0] + 3, this.position[1] - 3],
-      [this.position[0] + 3, this.position[1]],
-      [this.position[0] + 3, this.position[1] + 3],
-      [this.position[0] - 4, this.position[1] - 4],
-      [this.position[0] - 4, this.position[1]],
-      [this.position[0] - 4, this.position[1] + 4],
-      [this.position[0], this.position[1] - 4],
-      [this.position[0], this.position[1] + 4],
-      [this.position[0] + 4, this.position[1] - 4],
-      [this.position[0] + 4, this.position[1]],
-      [this.position[0] + 4, this.position[1] + 4],
+      [row - 2, col - 2],
+      [row - 2, col],
+      [row - 2, col + 2],
+      [row, col - 2],
+      [row, col + 2],
+      [row + 2, col - 2],
+      [row + 2, col],
+      [row + 2, col + 2],
+      [row - 3, col - 3],
+      [row - 3, col],
+      [row - 3, col + 3],
+      [row, col - 3],
+      [row, col + 3],
+      [row + 3, col - 3],
+      [row + 3, col],
+      [row + 3, col + 3],
+      [row - 4, col - 4],
+      [row - 4, col],
+      [row - 4, col + 4],
+      [row, col - 4],
+      [row, col + 4],
+      [row + 4, col - 4],
+      [row + 4, col],
+      [row + 4, col + 4],
     ];
-    const moves: MoveArr = options.map((move) => {
+    const moves: MoveArr = options.filter((move) => {
       const tile = board.arr[move[0]][move[1]];
-      if (tile === null || tile.side !== this.side) return [move[0], move[1]];
+      return tile === null || tile.side !== this.side;
     });
     return moves;
   }
@@ -169,15 +170,16 @@ export class Pawn extends Piece {
       [this.position[0] + (this.side ? 2 : -2), this.position[1]],
       [this.position[0] + (this.side ? 3 : -3), this.position[1]],
     ];
-    const moves: MoveArr = options.map((move) => {
+    const moves: MoveArr = [];
+    options.forEach((move) => {
       const tile = board.arr[move[0]][move[1]];
       if (tile === null) {
-        return [move[0], move[1]]
+        moves.push([move[0], move[1]]);
       } else if (tile.side !== this.side) {
-        if (
-          tile[move[0] + (this.side ? 1 : -1)][move[1] + (this.side ? 1 : -1)] === null
-          ) {
-            return [move[0] + (this.side ? 1 : -1), move[1] + (this.side ? 1 : -1)]
+        if (board.arr[move[0]][move[1] + 1]?.side !== this.side) {
+          moves.push([move[0], move[1] + 1]);
+        } else if (board.arr[move[0]][move[1] - 1]?.side !== this.side) {
+          moves.push([move[0], move[1] - 1]);
         }
       }
     });
