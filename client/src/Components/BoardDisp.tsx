@@ -34,8 +34,8 @@ export default function BoardDisp({ game }: { game: Board }) {
               className={(i + j) % 2 ? "black" : "col"}
               key={`${i}-${j}`}
               onClick={clickHandlerCreator(i, j)}
-            >
-              {col === null ? null : col.type === "pawn" ? (
+            > 
+              { i < 4 ? (col === null ? null : col.type === "pawn" ? (
                 <BlackPawn/>
               ) : col.type === "knight" ? (
                 <BlackKnight/>
@@ -49,7 +49,23 @@ export default function BoardDisp({ game }: { game: Board }) {
                 <BlackRook/>
               ) : col.type === "vanguard" ? (
                 <BlackVanguard/>
-              ) : null}
+              ) : null) :
+              (col === null ? null : col.type === "pawn" ? (
+                <WhitePawn/>
+              ) : col.type === "knight" ? (
+                <WhiteKnight/>
+              ) : col.type === "queen" ? (
+                <WhiteQueen/>
+              ) : col.type === "king" ? (
+                <WhiteKing/>
+              ) : col.type === "bishop" ? (
+                <WhiteBishop/>
+              ) : col.type === "rook" ? (
+                <WhiteRook/>
+              ) : col.type === "vanguard" ? (
+                <WhiteVanguard/>
+              ) : null)
+            }
             </div>
           ))}
         </div>
