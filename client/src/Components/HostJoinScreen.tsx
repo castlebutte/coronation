@@ -1,3 +1,4 @@
+import { useHistory } from "react-router-dom";
 import useTextField from "../useTextField";
 import socket from "../socket";
 import "./components.css";
@@ -7,6 +8,7 @@ import { ReactComponent as Host } from "../Assets/host_button.svg";
 import { ReactComponent as Join } from "../Assets/join_button.svg";
 
 export default function HostJoinScreen() {
+  const history = useHistory();
   const [code, codeHandler] = useTextField("");
   function joinGame() {
     socket.emit(
@@ -15,29 +17,33 @@ export default function HostJoinScreen() {
       ({
         ok,
         message,
-        lobby,
+        game,
       }: {
         ok: boolean;
         message: string;
-        lobby: Lobby;
+        game: Lobby;
       }) => {
         console.log(ok);
         console.log(message);
-        console.log(lobby);
+        console.log(game);
+        if (ok) {
+          history.push("/waiting");
+        }
       }
     );
   }
   function hostGame() {
     socket.emit("host", (code: string) => {
       console.log(code);
+      history.push("/waiting");
     });
   }
   return (
     <div className="hostJoinScreen">
       <h1 className="mediumText">Host Game</h1>
-      <a className="buttonBox" href="/waiting">
+      <div className="buttonBox" onClick={hostGame}>
         <Host />
-      </a>
+      </div>
       <h1 className="mediumText">Join Game</h1>
       <form className="inputField">
         <label className="smallText">
@@ -45,9 +51,9 @@ export default function HostJoinScreen() {
           <input type="text" value={code} onChange={codeHandler} />
         </label>
       </form>
-      <a className="buttonBox" href="/waiting">
+      <div className="buttonBox" onClick={joinGame}>
         <Join />
-      </a>
+      </div>
     </div>
   );
 }
