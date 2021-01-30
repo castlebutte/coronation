@@ -1,4 +1,6 @@
+import { Game } from "../../../types";
 import { Board } from "../../../types";
+
 
 import {ReactComponent as BlackBishop} from '../Assets/gamepieces/black_bishop.svg';
 import {ReactComponent as BlackKing} from '../Assets/gamepieces/black_king.svg';
@@ -16,15 +18,16 @@ import {ReactComponent as WhiteRook} from '../Assets/gamepieces/white_rook.svg';
 import {ReactComponent as WhiteVanguard} from '../Assets/gamepieces/white_vanguard.svg';
 
 
-
-export default function BoardDisp({ board }: { board: Board }) {
+export default function BoardDisp({ game }: { game: Board }) {
   const clickHandlerCreator = (row: number, col: number) => () => {
-    const piece = board.arr[row][col];
-    // piece.checkMoves() -> [number, number] []
+    const piece = game.board.arr[row][col];
+    if (piece === null) return;
+    const moves = piece.checkMoves(game.board);
+    moves.forEach((move) => {});
   };
   return (
     <>
-      {board.arr.map((row, i) => (
+      {game.board.arr.map((row, i) => (
         <div className="row" key={`${i}`}>
           {row.map((col, j) => (
             <div
