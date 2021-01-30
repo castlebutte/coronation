@@ -34,6 +34,7 @@
 .smallText {
   font-family: "Segoe UI";
   font-size: 18px;
+  font-weight: lighter;
   color: white;
   text-align: "center";
 }
