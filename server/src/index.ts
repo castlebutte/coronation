@@ -1,6 +1,6 @@
 import Express from "express";
 import { Socket, Server } from "socket.io";
-import { Game, Lobby, Move } from "../../types";
+import { Game, Lobby, Move, Settings } from "../../types";
 import { new8x8board } from "../../types/board";
 
 const app = Express();
@@ -21,6 +21,8 @@ function createRoom() {
   games[code] = {
     started: false,
     whiteTurn: true,
+    whiteCol: [],
+    blackCol: [],
   };
   return code;
 }
@@ -63,7 +65,23 @@ io.on("connection", (socket: Socket) => {
     socket.join(code);
     fn({ ok: true, messsage: "joined room" });
   });
-  socket.on("setting", (setting) => {});
+  socket.on("start", (fn) => {
+    const code = getCode(socket);
+    if (!gameExists(code)) return fn({ ok: false, board: null });
+    const game = games[code] as Game;
+    game.started = true;
+    game.board = new8x8board(game.whiteCol, game.blackCol);
+    game.whiteTurn = true;
+    socket.emit("start", game);
+  });
+  socket.on("setting", (setting: Settings, side: boolean, fn) => {
+    const code = getCode(socket);
+    if (!gameExists(code)) return fn({ ok: false, message: "no room" });
+    const game = games[code];
+    if (game.started) return fn({ ok: false, message: "game started" });
+    game[side ? "whiteCol" : "blackCol"] = setting.columns;
+    socket.emit("setting", game);
+  });
   socket.on("move", (move: Move) => {
     const code = getCode(socket);
     makeMove(code, move);

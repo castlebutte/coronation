@@ -2,6 +2,8 @@ import { Board } from "./board";
 export interface Lobby {
   started: boolean;
   whiteTurn: boolean; // is host white or black
+  whiteCol: number[];
+  blackCol: number[];
 }
 export interface Game extends Lobby {
   board: Board;
@@ -11,4 +13,9 @@ export interface Game extends Lobby {
 export interface Move {
   oldPos: [number, number];
   newPos: [number, number];
+}
+
+// vanguard positions
+export interface Settings {
+  columns: number[];
 }
