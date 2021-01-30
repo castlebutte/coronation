@@ -32,9 +32,9 @@
   color: white;
 }
 .smallText {
-  font-family: "Georgia";
-  font-size: 18;
-  color: "white";
+  font-family: "Segoe UI";
+  font-size: 18px;
+  color: white;
   text-align: "center";
 }
 .titleBox {
@@ -75,4 +75,12 @@
   align-items: center;
   height: 10px;
   margin-bottom: 1%;
+}
+.inputField {
+  width: 50%;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  padding: 1%;
 }

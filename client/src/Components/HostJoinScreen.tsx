@@ -12,6 +12,12 @@ export default function HostJoinScreen() {
         <Host />
       </a>
       <h1 className="mediumText">Join Game</h1>
+      <form className="inputField">
+        <label className="smallText">
+          Enter a game code:
+          <input type="text" name="code" />
+        </label>
+      </form>
       <a className="buttonBox" href="/waiting">
         <Join />
       </a>
