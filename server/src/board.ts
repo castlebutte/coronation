@@ -22,7 +22,6 @@ function createArray<T>(len: number, itm: T): T[] {
 }
 
 /**
- *
  * @param whiteCol the columns of the vanguards
  * @param blackCol the columns of the vanguards
  */

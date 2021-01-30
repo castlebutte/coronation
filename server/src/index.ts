@@ -57,14 +57,14 @@ io.on("connection", (socket: Socket) => {
   socket.on("host", (fn) => {
     const code = createRoom();
     socket.join(code);
-    fn(code);
+    fn({ code, game: games[code] });
   });
   socket.on("join", (code, fn) => {
     if (!gameExists(code)) return fn({ ok: false, message: "no room" });
     const game = games[code];
     if (game.started) return fn({ ok: false, message: "game started" });
     socket.join(code);
-    fn({ ok: true, message: "joined room", game });
+    fn({ ok: true, game });
   });
   socket.on("start", (fn) => {
     const code = getCode(socket);

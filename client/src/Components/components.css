@@ -113,3 +113,13 @@ input::-webkit-inner-spin-button {
   background-color: transparent;
   color: white;
 }
+
+.row {
+  display: flex;
+}
+.col {
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  background-color: blue;
+}
