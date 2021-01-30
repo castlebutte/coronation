@@ -31,15 +31,17 @@ export const newBoard = (
   blackCol: number[]
 ): Board => {
   const whitePawns: Piece[] = [];
-  for (let i = 0; i < sizeBoard - 1; ++i) {
+  for (let i = 0; i < sizeBoard; ++i) {
     whitePawns.push(
       whiteCol.includes(i) ? new Vanguard(1, i, true) : new Pawn(1, i, true)
     );
   }
   const blackPawns: Piece[] = [];
-  for (let i = 0; i < sizeBoard - 1; ++i) {
+  for (let i = 0; i < sizeBoard; ++i) {
     blackPawns.push(
-      blackCol.includes(i) ? new Vanguard(6, i, true) : new Pawn(6, i, true)
+      blackCol.includes(i)
+        ? new Vanguard(sizeBoard - 2, i, true)
+        : new Pawn(sizeBoard - 2, i, true)
     );
   }
   if (sizeBoard == 10) {
@@ -59,7 +61,7 @@ export const newBoard = (
           new Rook(0, 9, true),
         ],
         whitePawns,
-        ...createArray(5, createArray(10, null)),
+        ...createArray(6, createArray(10, null)),
         blackPawns,
         [
           new Rook(0, 0, true),
@@ -94,7 +96,7 @@ export const newBoard = (
           new Rook(0, 11, true),
         ],
         whitePawns,
-        ...createArray(6, createArray(12, null)),
+        ...createArray(8, createArray(12, null)),
         blackPawns,
         [
           new Rook(0, 0, true),
@@ -133,7 +135,7 @@ export const newBoard = (
           new Rook(0, 12, true),
         ],
         whitePawns,
-        ...createArray(7, createArray(14, null)),
+        ...createArray(10, createArray(14, null)),
         blackPawns,
         [
           new Rook(0, 0, true),
@@ -176,7 +178,7 @@ export const newBoard = (
           new Rook(0, 15, true),
         ],
         whitePawns,
-        ...createArray(8, createArray(16, null)),
+        ...createArray(12, createArray(16, null)),
         blackPawns,
         [
           new Rook(0, 0, true),
