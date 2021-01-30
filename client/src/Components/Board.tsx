@@ -13,10 +13,12 @@ export default function Board() {
   ];
   return (
     <>
-      {board.map((row) => (
-        <div className="row">
-          {row.map((col) => (
-            <div className="col">{col}</div>
+      {board.map((row, i) => (
+        <div className="row" key={`${i}`}>
+          {row.map((col, j) => (
+            <div className="col" key={`${i}-${j}`}>
+              {col}
+            </div>
           ))}
         </div>
       ))}

@@ -1,4 +1,4 @@
-import { Board } from "../../types/"; 
+import { Board } from "../../types/";
 export type MoveArr = [row: number, col: number][];
 export abstract class Piece {
   position: [number, number];
@@ -270,8 +270,8 @@ export class Vanguard extends Piece {
 
     // second part of the L
 
-        // up
-    for (let i=0;i<firstMoveHor.length;i++) {
+    // up
+    for (let i = 0; i < firstMoveHor.length; i++) {
       for (let j = firstMoveHor[i][1] - 1; j >= 0; j--) {
         const tile = board.arr[j][this.position[1]];
         if (tile === null) {
@@ -282,7 +282,7 @@ export class Vanguard extends Piece {
       }
     }
     // down
-    for (let i=0;i<firstMoveHor.length;i++) {
+    for (let i = 0; i < firstMoveHor.length; i++) {
       for (let j = firstMoveHor[i][1] + 1; j < board.size; j++) {
         const tile = board.arr[j][this.position[1]];
         if (tile === null) {
@@ -293,7 +293,7 @@ export class Vanguard extends Piece {
       }
     }
     // left
-    for (let i=0;i<firstMoveVert.length;i++) {
+    for (let i = 0; i < firstMoveVert.length; i++) {
       for (let j = firstMoveVert[i][1] - 1; j >= 0; j--) {
         const tile = board.arr[this.position[0]][j];
         if (tile === null) {
@@ -304,7 +304,7 @@ export class Vanguard extends Piece {
       }
     }
     // right
-    for (let i=0;i<firstMoveVert.length;i++) {
+    for (let i = 0; i < firstMoveVert.length; i++) {
       for (let j = firstMoveVert[i][1] + 1; j < board.size; j++) {
         const tile = board.arr[this.position[0]][j];
         if (tile === null) {
