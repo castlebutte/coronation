@@ -1,19 +1,15 @@
 import {
+  Piece,
+  Vanguard,
+  King,
   Bishop,
   Knight,
-  Piece,
-  Rook,
-  Pawn,
   Queen,
-  King,
-  Vanguard,
-} from "./Pieces";
-
-export type BoardSize = 8 | 10 | 12 | 14 | 16;
-export interface Board {
-  size: BoardSize;
-  arr: (Piece | null)[][];
-}
+  Pawn,
+  Rook,
+  Board,
+  BoardSize,
+} from "../../types";
 
 function createArray<T>(len: number, itm: T): T[] {
   let arr1 = [itm];

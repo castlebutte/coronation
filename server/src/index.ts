@@ -1,7 +1,7 @@
 import Express from "express";
 import { Socket, Server } from "socket.io";
 import { Game, Lobby, Move, Settings } from "../../types";
-import { newBoard } from "../../types/board";
+import { newBoard } from "./board";
 
 const app = Express();
 const router = Express.Router();

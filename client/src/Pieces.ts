@@ -1,4 +1,4 @@
-import { Board } from "./board";
+import { Board } from "../../types/board";
 export type MoveArr = [row: number, col: number][];
 export abstract class Piece {
   position: [number, number];
