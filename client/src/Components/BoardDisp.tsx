@@ -7,7 +7,7 @@ export default function BoardDisp({ board }: { board: Board }) {
           {row.map((col, j) => (
             <div className={( (i+j) % 2 ) ? "col" : "black" } key={`${i}-${j}`}>
               {/* Piece or null */}
-              {col}
+              {JSON.stringify(col)}
             </div>
           ))}
         </div>

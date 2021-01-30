@@ -19,7 +19,7 @@ export default function HomeScreen({
     });
   }
   function placeVanguard() {
-    socket.emit("start", (game: Game) => {
+    socket.emit("start", ({ game }: { game: Game }) => {
       history.push({ pathname: "/game", state: game });
     });
   }

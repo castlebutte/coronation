@@ -74,7 +74,7 @@ io.on("connection", (socket: Socket) => {
     game.started = true;
     game.board = newBoard(game.size, game.whiteCol, game.blackCol);
     game.whiteTurn = true;
-    fn({ ok: true, game });
+    fn(game);
     socket.emit("start", game);
   });
   socket.on("setting", (setting: Settings, side: boolean, fn) => {
@@ -82,7 +82,7 @@ io.on("connection", (socket: Socket) => {
     if (!gameExists(code)) return fn({ ok: false, message: "no room" });
     const game = games[code];
     if (game.started) return fn({ ok: false, message: "game started" });
-    game[side ? "whiteCol" : "blackCol"] = setting.columns;
+    if (setting.columns) game[side ? "whiteCol" : "blackCol"] = setting.columns;
     game.size = setting.size;
     socket.emit("setting", game);
   });
