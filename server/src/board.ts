@@ -7,9 +7,8 @@ import {
   Queen,
   Pawn,
   Rook,
-  Board,
-  BoardSize,
-} from "../../types";
+} from "./Pieces";
+import { Board, BoardSize } from "../../types";
 
 function createArray<T>(len: number, itm: T): T[] {
   let arr1 = [itm];

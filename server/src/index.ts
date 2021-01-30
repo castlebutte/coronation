@@ -41,6 +41,10 @@ router.get("/", (_, res) => {
   res.send("Hello, thyck bois and gorls of the world!");
 });
 
+router.get("/h", (_, res) => {
+  res.send("Hello, thyck bois and gorls of the world!");
+});
+
 app.use("/chess", router);
 
 const server = app.listen(port, () => console.log("Listening on port " + port));
@@ -60,7 +64,7 @@ io.on("connection", (socket: Socket) => {
     const game = games[code];
     if (game.started) return fn({ ok: false, message: "game started" });
     socket.join(code);
-    fn({ ok: true, messsage: "joined room" });
+    fn({ ok: true, message: "joined room" });
   });
   socket.on("start", (fn) => {
     const code = getCode(socket);
