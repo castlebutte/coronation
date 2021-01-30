@@ -1,30 +1,31 @@
-
-    .Screen {
-      padding: "5%";
-      alignItems: "center";
-      justifyContent: "center";
-      flex: 1;
-      backgroundColor: "black";
-      height: "100%";
-      width: "100%";
-    }
-    .BigText {
-      fontFamily: "Georgia";
-      fontSize: 30;
-      color: "white";
-    }
-    .SmallText {
-      fontFamily: "Georgia";
-      fontSize: 18;
-      color: "white";
-      textAlign: "center";
-    }
-    .ContinueText {
-      fontFamily: "Avenir-Light";
-      fontSize: 14;
-      color: "#892cdc";
-    }
-    .CorgiBox {
-      alignItems: "center";
-      marginBottom: "15%";
-    }
+.Screen {
+  padding: "5%";
+  align-items: "center";
+  justify-content: "center";
+  flex: 1;
+  background-color: "black";
+  height: "100%";
+  width: "100%";
+}
+.BigText {
+  font-family: "Georgia";
+  font-size: 30;
+  color: "white";
+}
+.SmallText {
+  font-family: "Georgia";
+  font-size: 18;
+  color: "white";
+  text-align: "center";
+}
+.ContinueText {
+  font-family: "Avenir-Light";
+  font-size: 14;
+  color: "#892cdc";
+}
+.CorgiBox {
+  align-items: "center";
+  margin-bottom: "15%";
+  width: "100%";
+  height: "100%";
+}
