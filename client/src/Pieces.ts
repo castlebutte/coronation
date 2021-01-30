@@ -216,6 +216,7 @@ export class Queen extends Piece {
     super(row, col, side);
   }
   checkMoves(board: Board) {
+    // bruh
     return [];
   }
 }
@@ -267,7 +268,7 @@ export class Vanguard extends Piece {
       }
     }
 
-    // second part of L
+    // second part of the L
 
         // up
     for (let i=0;i<firstMoveHor.length;i++) {
