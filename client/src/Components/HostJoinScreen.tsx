@@ -30,12 +30,14 @@ export default function HostJoinScreen() {
         <Host />
       </div>
       <h1 className="mediumText">Join Game</h1>
-      <form className="inputField">
-        <label className="smallText">
-          Enter a game code:
-          <input type="text" value={code} onChange={codeHandler} />
-        </label>
-      </form>
+      <div className="inputField">
+        <input
+          placeholder="Enter a game code: "
+          type="number"
+          value={code}
+          onChange={codeHandler}
+        />
+      </div>
       <div className="buttonBox" onClick={joinGame}>
         <Join />
       </div>
