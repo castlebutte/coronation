@@ -11,7 +11,18 @@ import {
 
 export interface Board {
   size: 8 | 10 | 12 | 14 | 16;
-  pieces: Piece[];
+  arr: (Piece | null)[][];
+}
+
+function createArray<T>(len: number, itm: T): T[] {
+  let arr1 = [itm];
+  let arr2: T[] = [];
+  while (len > 0) {
+    if (len & 1) arr2 = arr2.concat(arr1);
+    arr1 = arr1.concat(arr1);
+    len >>>= 1;
+  }
+  return arr2;
 }
 
 /**
@@ -34,25 +45,30 @@ export const new8x8board = (whiteCol: number[], blackCol: number[]): Board => {
   }
   return {
     size: 8,
-    pieces: [
-      new Rook(7, 0, true),
-      new Rook(7, 7, true),
-      new Knight(7, 1, true),
-      new Knight(7, 6, true),
-      new Bishop(7, 3, true),
-      new Bishop(7, 5, true),
-      new King(7, 4, true),
-      new Queen(7, 3, true),
-      ...blackPawns,
-      new Rook(0, 0, true),
-      new Rook(0, 7, true),
-      new Knight(0, 1, true),
-      new Knight(0, 6, true),
-      new Bishop(0, 2, true),
-      new Bishop(0, 5, true),
-      new King(0, 3, true),
-      new Queen(0, 4, true),
-      ...whitePawns,
+    arr: [
+      [
+        new Rook(0, 0, true),
+        new Knight(0, 1, true),
+        new Bishop(0, 2, true),
+        new King(0, 3, true),
+        new Queen(0, 4, true),
+        new Bishop(0, 5, true),
+        new Knight(0, 6, true),
+        new Rook(0, 7, true),
+      ],
+      whitePawns,
+      ...createArray(4, createArray(8, null)),
+      blackPawns,
+      [
+        new Rook(7, 0, true),
+        new Knight(7, 1, true),
+        new Bishop(7, 2, true),
+        new Queen(7, 3, true),
+        new King(7, 4, true),
+        new Bishop(7, 5, true),
+        new Knight(7, 6, true),
+        new Rook(7, 7, true),
+      ],
     ],
   };
 };
