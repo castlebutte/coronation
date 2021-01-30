@@ -9,8 +9,9 @@ import {
   Vanguard,
 } from "./Pieces";
 
+export type BoardSize = 8 | 10 | 12 | 14 | 16;
 export interface Board {
-  size: 8 | 10 | 12 | 14 | 16;
+  size: BoardSize;
   arr: (Piece | null)[][];
 }
 
@@ -31,52 +32,23 @@ function createArray<T>(len: number, itm: T): T[] {
  * @param blackCol the columns of the vanguards
  */
 export const newBoard = (
-  sizeBoard: 8 | 10 | 12 | 14 | 16, 
-  whiteCol: number[], 
+  sizeBoard: BoardSize,
+  whiteCol: number[],
   blackCol: number[]
-  ): Board => {
+): Board => {
   const whitePawns: Piece[] = [];
-  for (let i = 0; i < sizeBoard-1; ++i) {
+  for (let i = 0; i < sizeBoard - 1; ++i) {
     whitePawns.push(
       whiteCol.includes(i) ? new Vanguard(1, i, true) : new Pawn(1, i, true)
     );
   }
   const blackPawns: Piece[] = [];
-  for (let i = 0; i < sizeBoard-1; ++i) {
+  for (let i = 0; i < sizeBoard - 1; ++i) {
     blackPawns.push(
       blackCol.includes(i) ? new Vanguard(6, i, true) : new Pawn(6, i, true)
     );
   }
-  if (sizeBoard == 8) {
-    return {
-      size: sizeBoard,
-      arr: [
-        [
-          new Rook(0, 0, true),
-          new Knight(0, 1, true),
-          new Bishop(0, 2, true),
-          new Queen(0, 3, true),
-          new King(0, 4, true),
-          new Bishop(0, 5, true),
-          new Knight(0, 6, true),
-          new Rook(0, 7, true),
-        ],
-        whitePawns,
-        ...createArray(4, createArray(8, null)),
-        blackPawns,
-        [
-          new Rook(7, 0, true),
-          new Knight(7, 1, true),
-          new Bishop(7, 2, true),
-          new Queen(7, 3, true),
-          new King(7, 4, true),
-          new Bishop(7, 5, true),
-          new Knight(7, 6, true),
-          new Rook(7, 7, true),
-        ],
-      ],
-    };
-  } else if (sizeBoard == 10) {
+  if (sizeBoard == 10) {
     return {
       size: sizeBoard,
       arr: [
@@ -229,6 +201,35 @@ export const newBoard = (
           new Knight(0, 13, true),
           new Rook(0, 14, true),
           new Rook(0, 15, true),
+        ],
+      ],
+    };
+  } else {
+    return {
+      size: sizeBoard,
+      arr: [
+        [
+          new Rook(0, 0, true),
+          new Knight(0, 1, true),
+          new Bishop(0, 2, true),
+          new Queen(0, 3, true),
+          new King(0, 4, true),
+          new Bishop(0, 5, true),
+          new Knight(0, 6, true),
+          new Rook(0, 7, true),
+        ],
+        whitePawns,
+        ...createArray(4, createArray(8, null)),
+        blackPawns,
+        [
+          new Rook(7, 0, true),
+          new Knight(7, 1, true),
+          new Bishop(7, 2, true),
+          new Queen(7, 3, true),
+          new King(7, 4, true),
+          new Bishop(7, 5, true),
+          new Knight(7, 6, true),
+          new Rook(7, 7, true),
         ],
       ],
     };
