@@ -11,31 +11,16 @@ export default function HostJoinScreen() {
   const history = useHistory();
   const [code, codeHandler] = useTextField("");
   function joinGame() {
-    socket.emit(
-      "join",
-      code,
-      ({
-        ok,
-        message,
-        game,
-      }: {
-        ok: boolean;
-        message: string;
-        game: Lobby;
-      }) => {
-        console.log(ok);
-        console.log(message);
-        console.log(game);
-        if (ok) {
-          history.push("/waiting");
-        }
+    socket.emit("join", code, ({ ok, game }: { ok: boolean; game: Lobby }) => {
+      if (ok) {
+        history.push({ pathname: "/waiting", state: game });
       }
-    );
+    });
   }
   function hostGame() {
-    socket.emit("host", (code: string) => {
+    socket.emit("host", ({ code, game }: { code: string; game: Lobby }) => {
       console.log(code);
-      history.push("/waiting");
+      history.push({ pathname: "/waiting", state: game });
     });
   }
   return (
