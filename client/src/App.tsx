@@ -2,10 +2,10 @@ import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import "./App.css";
 
-import HomeScreen from "./components/HomeScreen";
-import HostJoinScreen from "./components/HostJoinScreen";
-import WaitingScreen from "./components/WaitingScreen";
-import GameScreen from "./components/GameScreen";
+import HomeScreen from "./Components/HomeScreen";
+import HostJoinScreen from "./Components/HostJoinScreen";
+import WaitingScreen from "./Components/WaitingScreen";
+import GameScreen from "./Components/GameScreen";
 
 export default function App() {
   return (
