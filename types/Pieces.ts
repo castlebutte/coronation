@@ -88,8 +88,8 @@ export class Bishop extends Piece {
     return (
       this.position[0] + i < size &&
       this.position[1] + i < size &&
-      this.position[0] + i >= 0 &&
-      this.position[1] + i >= 0
+      this.position[0] - i >= 0 &&
+      this.position[1] - i >= 0
     );
   }
   checkMoves(board: Board) {
