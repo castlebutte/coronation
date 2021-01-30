@@ -1,7 +1,7 @@
-import React from 'react';
-import './components.css';
+import React from "react";
+import "./components.css";
 
-export default function HomeScreen() {
+export default function HostJoinScreen() {
   return (
     <div className="Screen">
       <header className="CorgiBox">
@@ -9,13 +9,8 @@ export default function HomeScreen() {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <a
-
-        >
-          Learn React
-        </a>
+        <a>Learn React</a>
       </header>
     </div>
   );
 }
- 
