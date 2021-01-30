@@ -11,8 +11,7 @@ import {
 
 export interface Board {
   size: 8 | 10 | 12 | 14 | 16;
-  blackPcs: Piece[];
-  whitePcs: Piece[];
+  pieces: Piece[];
 }
 
 /**
@@ -35,7 +34,7 @@ export const new8x8board = (whiteCol: number[], blackCol: number[]): Board => {
   }
   return {
     size: 8,
-    blackPcs: [
+    pieces: [
       new Rook(7, 0, true),
       new Rook(7, 7, true),
       new Knight(7, 1, true),
@@ -45,8 +44,6 @@ export const new8x8board = (whiteCol: number[], blackCol: number[]): Board => {
       new King(7, 4, true),
       new Queen(7, 3, true),
       ...blackPawns,
-    ],
-    whitePcs: [
       new Rook(0, 0, true),
       new Rook(0, 7, true),
       new Knight(0, 1, true),
