@@ -15,15 +15,15 @@ export default function HostJoinScreen() {
       ({
         ok,
         message,
-        lobby,
+        game,
       }: {
         ok: boolean;
         message: string;
-        lobby: Lobby;
+        game: Lobby;
       }) => {
         console.log(ok);
         console.log(message);
-        console.log(lobby);
+        console.log(game);
       }
     );
   }
@@ -35,9 +35,9 @@ export default function HostJoinScreen() {
   return (
     <div className="hostJoinScreen">
       <h1 className="mediumText">Host Game</h1>
-      <a className="buttonBox" href="/waiting">
+      <div className="buttonBox" onClick={hostGame}>
         <Host />
-      </a>
+      </div>
       <h1 className="mediumText">Join Game</h1>
       <form className="inputField">
         <label className="smallText">
@@ -45,9 +45,9 @@ export default function HostJoinScreen() {
           <input type="text" value={code} onChange={codeHandler} />
         </label>
       </form>
-      <a className="buttonBox" href="/waiting">
+      <div className="buttonBox" onClick={joinGame}>
         <Join />
-      </a>
+      </div>
     </div>
   );
 }
