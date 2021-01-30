@@ -77,7 +77,39 @@ export class Knight extends Piece {
     super(row, col, side);
   }
   checkMoves(board: Board) {
-    return [];
+    // check all directions
+    //i apologize for this array lmao
+    const options = [
+      [this.position[0] - 2, this.position[1] - 2],
+      [this.position[0] - 2, this.position[1]],
+      [this.position[0] - 2, this.position[1] + 2],
+      [this.position[0], this.position[1] - 2],
+      [this.position[0], this.position[1] + 2],
+      [this.position[0] + 2, this.position[1] - 2],
+      [this.position[0] + 2, this.position[1]],
+      [this.position[0] + 2, this.position[1] + 2],
+      [this.position[0] - 3, this.position[1] - 3],
+      [this.position[0] - 3, this.position[1]],
+      [this.position[0] - 3, this.position[1] + 3],
+      [this.position[0], this.position[1] - 3],
+      [this.position[0], this.position[1] + 3],
+      [this.position[0] + 3, this.position[1] - 3],
+      [this.position[0] + 3, this.position[1]],
+      [this.position[0] + 3, this.position[1] + 3],
+      [this.position[0] - 4, this.position[1] - 4],
+      [this.position[0] - 4, this.position[1]],
+      [this.position[0] - 4, this.position[1] + 4],
+      [this.position[0], this.position[1] - 4],
+      [this.position[0], this.position[1] + 4],
+      [this.position[0] + 4, this.position[1] - 4],
+      [this.position[0] + 4, this.position[1]],
+      [this.position[0] + 4, this.position[1] + 4],
+    ];
+    const moves: MoveArr = options.map((move) => {
+      const tile = board.arr[move[0]][move[1]];
+      if (tile === null || tile.side !== this.side) return [move[0], move[1]];
+    });
+    return moves;
   }
 }
 export class Bishop extends Piece {
@@ -131,7 +163,21 @@ export class Pawn extends Piece {
     super(row, col, side);
   }
   checkMoves(board: Board) {
-    return [];
+    // check all directions
+    const options = [
+      [this.position[0] + 1, this.position[1]],
+      [this.position[0] + 2, this.position[1]],
+      [this.position[0] + 3, this.position[1]],
+    ];
+    const moves: MoveArr = options.map((move) => {
+      const tile = board.arr[move[0]][move[1]];
+      if (tile === null) {
+        return [move[0], move[1]]
+      } else if (tile.side !== this.side) {
+        
+      }
+    });
+    return moves;
   }
 }
 
