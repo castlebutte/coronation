@@ -14,3 +14,4 @@ export default function HomeScreen({ state }: Location<Game>) {
     </div>
   );
 }
+ 
