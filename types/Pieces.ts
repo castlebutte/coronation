@@ -84,8 +84,46 @@ export class Bishop extends Piece {
   constructor(row: number, col: number, side: boolean) {
     super(row, col, side);
   }
+  bishopBounds(i: number, size: number) {
+    return (
+      this.position[0] + i < size &&
+      this.position[1] + i < size &&
+      this.position[0] + i >= 0 &&
+      this.position[1] + i >= 0
+    );
+  }
   checkMoves(board: Board) {
-    return [];
+    const moves: MoveArr = [];
+    // do every direction
+    for (let i = 1; this.bishopBounds(i, board.size); i++) {
+      const pairs: [number, number][] = [
+        [this.position[0] - i, this.position[1] - i],
+        [this.position[0] - i, this.position[1] + i],
+        [this.position[0] + i, this.position[1] - i],
+        [this.position[0] + i, this.position[1] + i],
+      ];
+      const tiles = [
+        board.arr[pairs[0][0]][pairs[0][1]],
+        board.arr[pairs[1][0]][pairs[1][1]],
+        board.arr[pairs[2][0]][pairs[2][1]],
+        board.arr[pairs[3][0]][pairs[3][1]],
+      ];
+      for (let i = 0; i < 4; i++) {
+        if (tiles[i] === null) {
+          // empty
+          moves.push(pairs[i]);
+        } else if (tiles[i].side !== this.side) {
+          // enemy piece
+          moves.push(pairs[i]);
+          break;
+        } else {
+          // ally piece
+          break;
+        }
+      }
+    }
+
+    return moves;
   }
 }
 export class Pawn extends Piece {
