@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRounter, Route } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import "./App.css";
 
 import {
@@ -7,7 +7,7 @@ import {
   HostJoinScreen,
   WaitingScreen,
   GameScreen,
-} from "./Components";
+} from "./components";
 
 export default function App() {
   return (
