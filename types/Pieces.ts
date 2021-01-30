@@ -1,4 +1,5 @@
 import { Board } from "./board";
+export type MoveArr = [row: number, col: number][];
 export abstract class Piece {
   position: [number, number];
   side: boolean;
@@ -9,21 +10,66 @@ export abstract class Piece {
   move(row: number, col: number) {
     this.position = [row, col];
   }
-  abstract checkMoves(board: Board): [row: number, col: number][];
+  abstract checkMoves(board: Board): MoveArr;
 }
 export class Rook extends Piece {
   constructor(row: number, col: number, side: boolean) {
     super(row, col, side);
   }
   checkMoves(board: Board) {
+    const moves: MoveArr = [];
     // do each direction
+
     // up
-    for (let i = this.position[1]; i >= 0; i--) {
-      if (board.arr[this.position[0]][i]) {
+    for (let j = this.position[1] - 1; j >= 0; j--) {
+      const tile = board.arr[j][this.position[1]];
+      if (tile === null) {
+        moves.push([j, this.position[1]]);
+      } else if (tile.side !== this.side) {
+        moves.push([j, this.position[1]]);
+        break;
+      } else {
+        break;
+      }
+    }
+    // down
+    for (let i = this.position[1] + 1; i < board.size; i++) {
+      const tile = board.arr[i][this.position[1]];
+      if (tile === null) {
+        moves.push([i, this.position[1]]);
+      } else if (tile.side !== this.side) {
+        moves.push([i, this.position[1]]);
+        break;
+      } else {
+        break;
+      }
+    }
+    // left
+    for (let j = this.position[1] - 1; j >= 0; j--) {
+      const tile = board.arr[this.position[0]][j];
+      if (tile === null) {
+        moves.push([this.position[0], j]);
+      } else if (tile.side !== this.side) {
+        moves.push([this.position[0], j]);
+        break;
+      } else {
+        break;
+      }
+    }
+    // right
+    for (let j = this.position[1] + 1; j < board.size; j++) {
+      const tile = board.arr[this.position[0]][j];
+      if (tile === null) {
+        moves.push([this.position[0], j]);
+      } else if (tile.side !== this.side) {
+        moves.push([this.position[0], j]);
+        break;
+      } else {
+        break;
       }
     }
 
-    return [];
+    return moves;
   }
 }
 export class Knight extends Piece {
