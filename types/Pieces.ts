@@ -112,7 +112,7 @@ export class Bishop extends Piece {
         if (tiles[i] === null) {
           // empty
           moves.push(pairs[i]);
-        } else if (tiles[i].side !== this.side) {
+        } else if (tiles[i]?.side !== this.side) {
           // enemy piece
           moves.push(pairs[i]);
           break;
@@ -141,7 +141,7 @@ export class King extends Piece {
   }
   checkMoves(board: Board) {
     // check all directions
-    const options = [
+    const options: MoveArr = [
       [this.position[0] - 1, this.position[1] - 1],
       [this.position[0] - 1, this.position[1]],
       [this.position[0] - 1, this.position[1] + 1],
@@ -151,9 +151,9 @@ export class King extends Piece {
       [this.position[0] + 1, this.position[1]],
       [this.position[0] + 1, this.position[1] + 1],
     ];
-    const moves: MoveArr = options.map((move) => {
+    const moves: MoveArr = options.filter((move) => {
       const tile = board.arr[move[0]][move[1]];
-      if (tile === null || tile.side !== this.side) return [move[0], move[1]];
+      return tile === null || tile.side !== this.side;
     });
     return moves;
   }
