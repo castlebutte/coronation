@@ -25,13 +25,17 @@ export default function HomeScreen({
   }
   return (
     <div className="screen">
-      <h1 className="mediumText">Game Code: {lobby.code}</h1>
+      <h1 style={{ color: "#F4B670" }} className="mediumText">
+        Game Code: {lobby.code}
+      </h1>
       <div className="playerBox">
         <h1 className="smallText">Host: Corgi White</h1>
-        <h1 className="smallText">Joined: Corgi Beige</h1>
+        <h1 style={{ color: "#F4B670" }} className="smallText">
+          Joined: Corgi Beige
+        </h1>
       </div>
-      <h1 className="mediumText">Board Size: {lobby.size}</h1>
-      <div onClick={startGame}>
+      <h1 className="smallText">Board Size: {lobby.size}</h1>
+      <div className="buttonBox" onClick={startGame}>
         <Start />
       </div>
     </div>
