@@ -69,11 +69,12 @@ io.on("connection", (socket: Socket) => {
   });
   socket.on("start", (fn) => {
     const code = getCode(socket);
-    if (!gameExists(code)) return fn({ ok: false, board: null });
+    if (!gameExists(code)) return fn({ ok: false, game: null });
     const game = games[code] as Game;
     game.started = true;
     game.board = newBoard(game.size, game.whiteCol, game.blackCol);
     game.whiteTurn = true;
+    fn({ ok: true, game });
     socket.emit("start", game);
   });
   socket.on("setting", (setting: Settings, side: boolean, fn) => {

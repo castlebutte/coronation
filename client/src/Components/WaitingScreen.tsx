@@ -1,15 +1,28 @@
 import React from "react";
+import socket from "../socket";
 import "./components.css";
 import { ReactComponent as Start } from "../Assets/start_button.svg";
+import { useHistory } from "react-router-dom";
 import { Location } from "history";
-import { Lobby } from "../../../types";
+import { Game, Lobby } from "../../../types";
 
 export default function HomeScreen({
   location,
 }: {
   location: Location<Lobby>;
 }) {
+  const history = useHistory();
   const lobby = location.state;
+  function startGame() {
+    socket.emit("start", (game: Game) => {
+      history.push({ pathname: "/game", state: game });
+    });
+  }
+  function placeVanguard() {
+    socket.emit("start", (game: Game) => {
+      history.push({ pathname: "/game", state: game });
+    });
+  }
   return (
     <div className="screen">
       <h1 className="mediumText">Game Code: {lobby.code}</h1>
@@ -18,9 +31,9 @@ export default function HomeScreen({
         <h1 className="smallText">Joined: Corgi Beige</h1>
       </div>
       <h1 className="mediumText">Board Size: {lobby.size}</h1>
-      <a href="/game">
+      <div onClick={startGame}>
         <Start />
-      </a>
+      </div>
     </div>
   );
 }
