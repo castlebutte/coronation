@@ -4,9 +4,10 @@ import Board from "./Board";
 
 export default function HomeScreen() {
   return (
-    <div className="Screen">
-      game
-      <Board />
+    <div className="screen">
+      <div className="boardBox">
+        <Board />
+      </div>
     </div>
   );
 }

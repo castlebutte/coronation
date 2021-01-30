@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -52,21 +53,6 @@
   justify-content: center;
   flex-direction: row;
 }
-/* .startButton {
-  color: white;
-  flex-direction: column;
-  justify-self: start;
-  font-family: "Segoe UI";
-  text-decoration: unset;
-  background-color: #f4b670;
-  padding: 1%;
-  margin-bottom: 1%;
-  width: 30%;
-  height: 5%;
-  text-align: center;
-  vertical-align: middle;
-  border-radius: 40px;
-} */
 .buttonBox {
   display: flex;
   width: 250px;
@@ -81,15 +67,20 @@
   margin-bottom: 1%;
   margin-top: 5%;
 }
-/* .inputField input {
-  width: 100%;
-  height: 50px;
+.boardBox {
   flex-direction: column;
+  display: flex;
+  border-radius: 40px;
+  border-width: 1px;
+  border-color: white;
+  border-style: solid;
+  width: 500px;
+  height: 500px;
+  align-items: center;
   justify-content: center;
-  align-content: center;
-  text-align: center;
-  padding: 1%;
-} */
+}
+
+/* OTHER COMPONENTS */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -118,8 +109,8 @@ input::-webkit-inner-spin-button {
   display: flex;
 }
 .col {
-  width: 20px;
-  height: 20px;
-  border: 1px solid black;
-  background-color: blue;
+  width: 50px;
+  height: 50px;
+  border: 1px solid white;
+  background-color: #f4b670;
 }
