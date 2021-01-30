@@ -1,9 +1,8 @@
 import { Board } from "./board";
 export interface Game {
   started: boolean;
-  code: string;
   whiteTurn: boolean;
-  board: Board;
+  board?: Board;
 }
 
 export interface Move {
