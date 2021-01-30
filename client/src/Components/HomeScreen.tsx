@@ -11,7 +11,7 @@ export default function HomeScreen() {
         <CorgiLogo />
         <h1 className="bigText">Coronation</h1>
       </div>
-      <a className="startBox" href="/hostjoin">
+      <a href="/hostjoin">
         <Start />
       </a>
       <div className="teamBox">
