@@ -79,7 +79,7 @@ export class Knight extends Piece {
   checkMoves(board: Board) {
     // check all directions
     //i apologize for this array lmao
-    const options = [
+    const options: MoveArr = [
       [this.position[0] - 2, this.position[1] - 2],
       [this.position[0] - 2, this.position[1]],
       [this.position[0] - 2, this.position[1] + 2],
@@ -164,17 +164,21 @@ export class Pawn extends Piece {
   }
   checkMoves(board: Board) {
     // check all directions
-    const options = [
-      [this.position[0] + 1, this.position[1]],
-      [this.position[0] + 2, this.position[1]],
-      [this.position[0] + 3, this.position[1]],
+    const options: MoveArr = [
+      [this.position[0] + (this.side ? 1 : -1), this.position[1]],
+      [this.position[0] + (this.side ? 2 : -2), this.position[1]],
+      [this.position[0] + (this.side ? 3 : -3), this.position[1]],
     ];
     const moves: MoveArr = options.map((move) => {
       const tile = board.arr[move[0]][move[1]];
       if (tile === null) {
         return [move[0], move[1]]
       } else if (tile.side !== this.side) {
-        
+        if (
+          tile[move[0] + (this.side ? 1 : -1)][move[1] + (this.side ? 1 : -1)] === null
+          ) {
+            return [move[0] + (this.side ? 1 : -1), move[1] + (this.side ? 1 : -1)]
+        }
       }
     });
     return moves;
