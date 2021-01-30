@@ -1,4 +1,4 @@
-.Screen {
+.screen {
   padding: "5%";
   align-items: "center";
   justify-content: "center";
@@ -7,23 +7,23 @@
   height: "100%";
   width: "100%";
 }
-.BigText {
+.bigText {
   font-family: "Georgia";
   font-size: 30;
   color: "white";
 }
-.SmallText {
+.smallText {
   font-family: "Georgia";
   font-size: 18;
   color: "white";
   text-align: "center";
 }
-.ContinueText {
+.continueText {
   font-family: "Avenir-Light";
   font-size: 14;
   color: "#892cdc";
 }
-.CorgiBox {
+.corgiBox {
   align-items: "center";
   margin-bottom: "15%";
   width: "100%";
