@@ -1,16 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import socket from "../socket";
 import "./components.css";
 import { ReactComponent as Start } from "../Assets/start_button.svg";
 import { useHistory } from "react-router-dom";
 import { Location } from "history";
-import { Game, Lobby } from "../../../types";
+import { BoardSize, Game, Lobby } from "../../../types";
 import { ReactComponent as Eight } from "../Assets/8x8.svg";
 import { ReactComponent as Ten } from "../Assets/10x10.svg";
 import { ReactComponent as Twelve } from "../Assets/12x12.svg";
 import { ReactComponent as Fourteen } from "../Assets/14x14.svg";
 import { ReactComponent as Sixteen } from "../Assets/16x16.svg";
 
+function inc(size: BoardSize): BoardSize {
+  return (size === 16 ? 8 : size + 2) as BoardSize;
+}
+function dec(size: BoardSize): BoardSize {
+  return (size === 8 ? 16 : size - 2) as BoardSize;
+}
 export default function HomeScreen({
   location,
 }: {
@@ -38,7 +44,10 @@ export default function HomeScreen({
     });
   }
 
-  const [size, setSize] = useState();
+  const [size, setSize] = useState(lobby.size);
+  useEffect(() => {
+    socket.emit("setting", { size }, ({ ok }: { ok: boolean }) => {});
+  }, [size]);
   const boardSizes = [
     <div className="buttonBox">
       <Eight />
@@ -66,11 +75,14 @@ export default function HomeScreen({
         <h1 className="smallText">Host: White</h1>
         <h1 className="smallText">Joined: Black</h1>
       </div>
-      <h1 className="smallText">Board Size: {lobby.size}</h1>
+      <h1 className="smallText">Board Size: {size}</h1>
 
-      {boardSizes.map((boardSize) => (
-        <li>{boardSize}</li>
-      ))}
+      <div onClick={() => setSize(inc(size))}>
+        <Start />
+      </div>
+      <div onClick={() => setSize(dec(size))}>
+        <Start />
+      </div>
 
       <div className="buttonBox" onClick={startGame}>
         <Start />
