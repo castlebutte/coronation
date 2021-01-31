@@ -10,6 +10,9 @@ import { ReactComponent as Ten } from "../Assets/10x10.svg";
 import { ReactComponent as Twelve } from "../Assets/12x12.svg";
 import { ReactComponent as Fourteen } from "../Assets/14x14.svg";
 import { ReactComponent as Sixteen } from "../Assets/16x16.svg";
+import { ReactComponent as Add } from "../Assets/add.svg";
+import { ReactComponent as Minus } from "../Assets/minus.svg";
+import { isJSDocFunctionType } from "typescript";
 
 function inc(size: BoardSize): BoardSize {
   return (size === 16 ? 8 : size + 2) as BoardSize;
@@ -75,13 +78,24 @@ export default function HomeScreen({
         <h1 className="smallText">Host: White</h1>
         <h1 className="smallText">Joined: Black</h1>
       </div>
-      <h1 className="smallText">Board Size: {size}</h1>
 
-      <div onClick={() => setSize(inc(size))}>
-        <Start />
-      </div>
-      <div onClick={() => setSize(dec(size))}>
-        <Start />
+      <div
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignContent: "center",
+          alignSelf: "center",
+          alignItems: "center",
+        }}
+      >
+        <div className="buttonBox" onClick={() => setSize(inc(size))}>
+          <Add />
+        </div>
+        <h1 className="smallText">Board Size: {size}</h1>
+
+        <div onClick={() => setSize(dec(size))}>
+          <Minus />
+        </div>
       </div>
 
       <div className="buttonBox" onClick={startGame}>
