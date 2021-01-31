@@ -19,6 +19,7 @@ import { ReactComponent as WhiteQueen } from "../Assets/gamepieces/white_queen.s
 import { ReactComponent as WhiteRook } from "../Assets/gamepieces/white_rook.svg";
 import { ReactComponent as WhiteVanguard } from "../Assets/gamepieces/white_vanguard.svg";
 import socket from "../socket";
+import { MoveArr } from "../../../types";
 
 function clearSelected(arr: Board["arr"]) {
   let newArr = [...arr];
@@ -30,6 +31,20 @@ function clearSelected(arr: Board["arr"]) {
     });
   });
   return arr;
+}
+
+function addMoves(arr: Board["arr"], moves: MoveArr) {
+  let newArr = [...arr];
+  moves.forEach((move) => {
+    newArr[move[0]][move[1]] = {
+      position: [-1, -1],
+      type: "selected",
+      side: false,
+      checkMoves: () => [],
+      move: (a, b) => [],
+    };
+  });
+  return newArr;
 }
 
 export default function BoardDisp({ game }: { game: Game }) {
@@ -46,6 +61,8 @@ export default function BoardDisp({ game }: { game: Game }) {
   const clickHandlerCreator = (row: number, col: number) => () => {
     let piece = game.board.arr[row][col];
     if (piece == null) return;
+    console.log(piece.type);
+    console.log(selected);
     if (piece.type === "selected" && selected) {
       const oldPos = selected.position;
       const newPos = [row, col];
@@ -68,21 +85,10 @@ export default function BoardDisp({ game }: { game: Game }) {
       const moves = piece.checkMoves(game.board);
       setArr(newArr);
       setSelected(piece);
-      setArr((arr) => {
-        let newArr = [...arr];
-        moves.forEach((move) => {
-          newArr[move[0]][move[1]] = {
-            position: [-1, -1],
-            type: "selected",
-            side: false,
-            checkMoves: () => [],
-            move: (a, b) => [],
-          };
-        });
-        return newArr;
-      });
+      setArr((arr) => addMoves(arr, moves));
     }
   };
+
   return (
     <>
       {arr.map((row, i) => (

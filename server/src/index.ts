@@ -77,7 +77,7 @@ io.on("connection", (socket: Socket) => {
     game.board = newBoard(game.size, game.whiteCol, game.blackCol);
     game.whiteTurn = true;
     fn(game);
-    socket.emit("start", game);
+    socket.to(code).emit("start", game);
   });
   socket.on("setting", (setting: Settings, side: boolean, fn) => {
     const code = getCode(socket);
@@ -86,13 +86,13 @@ io.on("connection", (socket: Socket) => {
     if (game.started) return fn({ ok: false, message: "game started" });
     if (setting.columns) game[side ? "whiteCol" : "blackCol"] = setting.columns;
     game.size = setting.size;
-    socket.emit("setting", game);
+    socket.to(code).emit("setting", game);
   });
   socket.on("move", (move: Move) => {
     const code = getCode(socket);
     if (!gameExists(code)) return;
     makeMove(code, move);
     const { board } = games[code] as Game;
-    socket.emit("move", board.arr);
+    socket.to(code).emit("move", board.arr);
   });
 });
