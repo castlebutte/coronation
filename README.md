@@ -35,6 +35,7 @@ We divided the tasks as follows:
 
 ### Charles Ancheta:
 
+- Front end functionality
 - Back end
 - Real time turn communication via Socket.io
 
