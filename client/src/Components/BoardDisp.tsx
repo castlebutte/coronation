@@ -3,6 +3,8 @@ import { useState } from "react";
 import { createPiece } from "../Pieces";
 
 import { ReactComponent as BlackBishop } from "../Assets/gamepieces/black_bishop.svg";
+import { ReactComponent as Move } from "../Assets/move.svg";
+import { ReactComponent as Attack } from "../Assets/attack.svg";
 import { ReactComponent as BlackKing } from "../Assets/gamepieces/black_king.svg";
 import { ReactComponent as BlackKnight } from "../Assets/gamepieces/black_knight.svg";
 import { ReactComponent as BlackPawn } from "../Assets/gamepieces/black_pawn.svg";
@@ -27,10 +29,18 @@ export default function BoardDisp({ game }: { game: Game }) {
     const moves = piece.checkMoves(game.board);
     console.log(moves);
     setArr((arr) => {
+      console.log(arr);
       let newArr = [...arr];
       moves.forEach((move) => {
-        newArr[move[0]][move[1]] = new Piece(-1, -1, false, "selected");
+        newArr[move[0]][move[1]] = {
+          position: [-1, -1],
+          type: "selected",
+          side: false,
+          checkMoves: () => [],
+          move: (a, b) => [],
+        };
       });
+      console.log(newArr);
       return newArr;
     });
   };
@@ -75,7 +85,7 @@ export default function BoardDisp({ game }: { game: Game }) {
               ) : col.type === "vanguard" ? (
                 <WhiteVanguard />
               ) : col.type === "selected" ? (
-
+                <Move />
               ) : null}
             </div>
           ))}
