@@ -1,4 +1,5 @@
-import { Game } from "../../../types";
+import { Game, Piece } from "../types.d";
+import { useState } from "react";
 import { createPiece } from "../Pieces";
 
 import { ReactComponent as BlackBishop } from "../Assets/gamepieces/black_bishop.svg";
@@ -17,18 +18,25 @@ import { ReactComponent as WhiteRook } from "../Assets/gamepieces/white_rook.svg
 import { ReactComponent as WhiteVanguard } from "../Assets/gamepieces/white_vanguard.svg";
 
 export default function BoardDisp({ game }: { game: Game }) {
+  const [arr, setArr] = useState(game.board.arr);
   const clickHandlerCreator = (row: number, col: number) => () => {
     let piece = game.board.arr[row][col];
-    if (piece === null) return;
+    if (piece == null) return;
     piece = createPiece(piece);
     console.log(piece);
     const moves = piece.checkMoves(game.board);
     console.log(moves);
-    moves.forEach((move) => {});
+    setArr((arr) => {
+      let newArr = [...arr];
+      moves.forEach((move) => {
+        newArr[move[0]][move[1]] = new Piece(-1, -1, false, "selected");
+      });
+      return newArr;
+    });
   };
   return (
     <>
-      {game.board.arr.map((row, i) => (
+      {arr.map((row, i) => (
         <div className="row" key={`${i}`}>
           {row.map((col, j) => (
             <div
@@ -66,6 +74,8 @@ export default function BoardDisp({ game }: { game: Game }) {
                 <WhiteRook />
               ) : col.type === "vanguard" ? (
                 <WhiteVanguard />
+              ) : col.type === "selected" ? (
+
               ) : null}
             </div>
           ))}

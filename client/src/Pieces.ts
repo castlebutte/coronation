@@ -1,4 +1,8 @@
 import { Board } from "../../types/";
+
+function inBounds(i: number, j: number, size: number) {
+  return i >= 0 && i < size && j >= 0 && j < size;
+}
 export type MoveArr = [row: number, col: number][];
 export type PieceType =
   | "rook"
@@ -7,7 +11,8 @@ export type PieceType =
   | "pawn"
   | "queen"
   | "king"
-  | "vanguard";
+  | "vanguard"
+  | "selected";
 
 export function createPiece(piece: Piece) {
   const { position: pos, side, type } = piece;
@@ -26,6 +31,8 @@ export function createPiece(piece: Piece) {
       return new Vanguard(pos[0], pos[1], side);
     case "knight":
       return new Knight(pos[0], pos[1], side);
+    default:
+      return new Piece(pos[0], pos[1], side, "selected");
   }
 }
 export class Piece {
@@ -54,6 +61,7 @@ export class Rook extends Piece {
 
     // up
     for (let j = this.position[1] - 1; j >= 0; j--) {
+      if (!inBounds(j, this.position[1], board.size)) continue;
       const tile = board.arr[j][this.position[1]];
       if (tile === null) {
         moves.push([j, this.position[1]]);
@@ -65,12 +73,13 @@ export class Rook extends Piece {
       }
     }
     // down
-    for (let i = this.position[1] + 1; i < board.size; i++) {
-      const tile = board.arr[i][this.position[1]];
+    for (let j = this.position[1] + 1; j < board.size; j++) {
+      if (!inBounds(j, this.position[1], board.size)) continue;
+      const tile = board.arr[j][this.position[1]];
       if (tile === null) {
-        moves.push([i, this.position[1]]);
+        moves.push([j, this.position[1]]);
       } else if (tile.side !== this.side) {
-        moves.push([i, this.position[1]]);
+        moves.push([j, this.position[1]]);
         break;
       } else {
         break;
@@ -139,6 +148,7 @@ export class Knight extends Piece {
       [row + 4, col + 4],
     ];
     const moves: MoveArr = options.filter((move) => {
+      if (!inBounds(move[0], move[1], board.size)) return false;
       const tile = board.arr[move[0]][move[1]];
       return tile === null || tile.side !== this.side;
     });
@@ -204,6 +214,13 @@ export class Pawn extends Piece {
     ];
     const moves: MoveArr = [];
     options.forEach((move) => {
+      if (
+        move[0] < 0 ||
+        move[0] >= board.size ||
+        move[1] < 0 ||
+        move[1] >= board.size
+      )
+        return;
       const tile = board.arr[move[0]][move[1]];
       if (tile === null) {
         moves.push([move[0], move[1]]);
@@ -236,6 +253,13 @@ export class King extends Piece {
       [this.position[0] + 1, this.position[1] + 1],
     ];
     const moves: MoveArr = options.filter((move) => {
+      if (
+        move[0] < 0 ||
+        move[0] >= board.size ||
+        move[1] < 0 ||
+        move[1] >= board.size
+      )
+        return false;
       const tile = board.arr[move[0]][move[1]];
       return tile === null || tile.side !== this.side;
     });
@@ -265,6 +289,7 @@ export class Vanguard extends Piece {
 
     // up
     for (let j = this.position[1] - 1; j >= 0; j--) {
+      if (!inBounds(j, this.position[1], board.size)) continue;
       const tile = board.arr[j][this.position[1]];
       if (tile === null) {
         firstMoveVert.push([j, this.position[1]]);
@@ -274,6 +299,7 @@ export class Vanguard extends Piece {
     }
     // down
     for (let i = this.position[1] + 1; i < board.size; i++) {
+      if (!inBounds(i, this.position[1], board.size)) continue;
       const tile = board.arr[i][this.position[1]];
       if (tile === null) {
         firstMoveVert.push([i, this.position[1]]);
@@ -283,6 +309,7 @@ export class Vanguard extends Piece {
     }
     // left
     for (let j = this.position[1] - 1; j >= 0; j--) {
+      if (!inBounds(this.position[1], 0, board.size)) continue;
       const tile = board.arr[this.position[0]][j];
       if (tile === null) {
         firstMoveHor.push([this.position[0], j]);
@@ -292,6 +319,7 @@ export class Vanguard extends Piece {
     }
     // right
     for (let j = this.position[1] + 1; j < board.size; j++) {
+      if (!inBounds(this.position[0], 0, board.size)) continue;
       const tile = board.arr[this.position[0]][j];
       if (tile === null) {
         firstMoveHor.push([this.position[0], j]);
