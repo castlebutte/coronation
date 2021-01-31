@@ -228,7 +228,7 @@ export class Pawn extends Piece {
       } else if ( tile) {
         options.pop();
       }
-      
+
       if (tile === null) {
         moves.push([move[0], move[1]]);
       } else if (tile.side !== this.side) {
@@ -237,14 +237,15 @@ export class Pawn extends Piece {
             return;
           } else {
             moves.push([move[0], move[1] + 1]);
+            if (board.arr[move[0]][move[1] - 1]?.side !== this.side) {
+              if (move[1] - 1 < 0) {
+                return;
+              } else {
+                moves.push([move[0], move[1] - 1]);
+              }
+            }
           }
-        } else if (board.arr[move[0]][move[1] - 1]?.side !== this.side) {
-          if (move[1] - 1 < 0) {
-            return;
-          } else {
-            moves.push([move[0], move[1] - 1]);
-          }
-        }
+        } 
       }
     });
     return moves;
