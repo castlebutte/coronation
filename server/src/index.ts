@@ -34,7 +34,7 @@ function makeMove(code: string, move: Move) {
   const piece = game.board.arr[move.oldPos[0]][move.oldPos[1]];
   piece?.move(move.oldPos[0], move.oldPos[1]);
   game.board.arr[move.oldPos[0]][move.oldPos[0]] = null;
-  game.board.arr[move.oldPos[1]][move.oldPos[1]] = piece;
+  game.board.arr[move.newPos[1]][move.newPos[1]] = piece;
 }
 function getCode(socket: Socket) {
   return Array.from(socket.rooms)[1];
@@ -90,6 +90,7 @@ io.on("connection", (socket: Socket) => {
   });
   socket.on("move", (move: Move) => {
     const code = getCode(socket);
+    if (!gameExists(code)) return;
     makeMove(code, move);
   });
 });
