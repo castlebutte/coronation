@@ -39,6 +39,9 @@ export default function BoardDisp({ game }: { game: Game }) {
     socket.on("move", (arr: Board["arr"]) => {
       setArr(arr);
     });
+    return () => {
+      socket.off("move");
+    };
   }, [setArr]);
   const clickHandlerCreator = (row: number, col: number) => () => {
     let piece = game.board.arr[row][col];
