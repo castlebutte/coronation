@@ -46,7 +46,7 @@ export default function HomeScreen({
 
   const [size, setSize] = useState(lobby.size);
   useEffect(() => {
-    socket.emit("setting", { size }, ({ ok }: { ok: boolean }) => {});
+    socket.emit("setting", { size }, false, ({ ok }: { ok: boolean }) => {});
   }, [size]);
   const boardSizes = [
     <div className="buttonBox">
