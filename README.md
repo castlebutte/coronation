@@ -35,7 +35,6 @@ We divided the tasks as follows:
 
 ### Charles Ancheta:
 
-- Front end functionality
 - Back end
 - Real time turn communication via Socket.io
 
@@ -67,5 +66,8 @@ This was the first time most of us have made a game. We learned a lot about turn
 
 - Part of the team designed all the features and prototypes of the game screens before actually coding it so there’s a lot we plan to implement. Juyoung completed the loading screens to play the background story before the game starts after pressing start on the home screen. It was a really cute feature but due to time constraints, we had to leave it to last. This would be done using more page components and connected in using react-router-dom and adding a timed transition or a “touch to continue” function.
 - Another feature would be the customizable board options.
+- Fix some of the quirks relating to the moves of the different pieces. Not all of them work all the time.
+- Add the Queen being able to move.
+- Fix multiplayer game.
 
 ## - Castle Butte
