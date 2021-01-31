@@ -10,17 +10,25 @@ This web application engages two players in a modified game of chess. The featur
 ## How we built it
 We chose to develop our game using React, Express, and NodeJS with Socket.IO. We used TypeScript instead of JavaScript to remove runtime errors, especially important when working as a group. The React framework is easy to use and always results in a good UI.  A NodeJS server using the Express framework was needed for the multiplayer game. Socket.IO was necessary for the multiplayer chess game to prevent us from having to make a new HTTP request for every turn.
 We divided the tasks as follows:
-#Annette Lau:**
+<br/>
+**Annette Lau:**
+<br/>
 - Front end
 - GUI design/prototyping
+<br/>
 #**Charles Ancheta**
+<br/>
 - Back end
 - Real time turn communication via Socket.io
+<br/>
 #**Juyoung Kim**
+<br/>
 - Storyline development
 - Front end
 - Art
+<br/>
 #**William Chorkawy**
+<br/>
 - Front end
 - Back end
 - Real time turn communication via Socket.io
