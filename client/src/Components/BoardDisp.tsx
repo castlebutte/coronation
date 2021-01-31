@@ -1,4 +1,4 @@
-import { Game, Piece } from "../types.d";
+import { Board, Game, Piece } from "../types.d";
 import { useState } from "react";
 import { createPiece } from "../Pieces";
 
@@ -20,6 +20,18 @@ import { ReactComponent as WhiteRook } from "../Assets/gamepieces/white_rook.svg
 import { ReactComponent as WhiteVanguard } from "../Assets/gamepieces/white_vanguard.svg";
 import socket from "../socket";
 
+function clearSelected(arr: Board["arr"]) {
+  let newArr = [...arr];
+  newArr.forEach((row, i) => {
+    row.forEach((col, j) => {
+      if (col?.type === "selected") {
+        newArr[i][j] = null;
+      }
+    });
+  });
+  return arr;
+}
+
 export default function BoardDisp({ game }: { game: Game }) {
   const [selected, setSelected] = useState<Piece | null>(null);
   const [arr, setArr] = useState(game.board.arr);
@@ -35,37 +47,38 @@ export default function BoardDisp({ game }: { game: Game }) {
         let newArr = [...arr];
         newArr[oldPos[0]][oldPos[1]] = null;
         newArr[newPos[0]][newPos[1]] = selected;
-        newArr.forEach((row, i) => {
-          row.forEach((col, j) => {
-            if (col?.type === "selected") {
-              newArr[i][j] = null;
-            }
-          });
+        return clearSelected(newArr);
+      });
+      setSelected(null);
+      return;
+    }
+    console.log({ row, row1: selected?.position[0] });
+    console.log({ col, col1: selected?.position[1] });
+    if (row === selected?.position[0] && col === selected?.position[1]) {
+      console.log("same");
+    } else {
+      piece = createPiece(piece);
+      const newArr = clearSelected(arr);
+      const moves = piece.checkMoves(game.board);
+      setArr(newArr);
+      console.log(piece);
+      console.log(moves);
+      setSelected(piece);
+      setArr((arr) => {
+        console.log(arr);
+        let newArr = [...arr];
+        moves.forEach((move) => {
+          newArr[move[0]][move[1]] = {
+            position: [-1, -1],
+            type: "selected",
+            side: false,
+            checkMoves: () => [],
+            move: (a, b) => [],
+          };
         });
         return newArr;
       });
-      setSelected(null);
     }
-    piece = createPiece(piece);
-    console.log(piece);
-    const moves = piece.checkMoves(game.board);
-    console.log(moves);
-    setSelected(piece);
-    setArr((arr) => {
-      console.log(arr);
-      let newArr = [...arr];
-      moves.forEach((move) => {
-        newArr[move[0]][move[1]] = {
-          position: [-1, -1],
-          type: "selected",
-          side: false,
-          checkMoves: () => [],
-          move: (a, b) => [],
-        };
-      });
-      console.log(newArr);
-      return newArr;
-    });
   };
   return (
     <>
