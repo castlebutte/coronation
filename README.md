@@ -13,25 +13,25 @@ We divided the tasks as follows:
 <br/>
 **Annette Lau:**
 <br/>
-- Front end
-- GUI design/prototyping
+- Front end\
+- GUI design/prototyping\
 <br/>
-#**Charles Ancheta**
+**Charles Ancheta**
 <br/>
-- Back end
-- Real time turn communication via Socket.io
+- Back end\
+- Real time turn communication via Socket.io\
 <br/>
-#**Juyoung Kim**
+**Juyoung Kim**
 <br/>
-- Storyline development
-- Front end
-- Art
+- Storyline development\
+- Front end\
+- Art\
 <br/>
-#**William Chorkawy**
+**William Chorkawy**
 <br/>
-- Front end
-- Back end
-- Real time turn communication via Socket.io
+- Front end\
+- Back end\
+- Real time turn communication via Socket.io\
 
 ## Challenges we ran into
 One of our largest hurdles while creating this application was implementing the correct algorithms for each of the pieces' moves. Given the time constraint of the competition and the relative computational simplicity of the program, we opted for easier to write algorithms rather than spending more time optimizing efficiency. Determining the legal moves for the vanguard and the queen were especially among our most difficult tasks. The choice of using React was also difficult because ¾ of the team have never used it before. However, we agreed that a chess game would be better implemented on a web browser. 
