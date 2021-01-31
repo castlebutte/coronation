@@ -222,6 +222,13 @@ export class Pawn extends Piece {
       )
         return;
       const tile = board.arr[move[0]][move[1]];
+      if (tile) {
+        options.pop();
+        options.pop();
+      } else if ( tile) {
+        options.pop();
+      }
+      
       if (tile === null) {
         moves.push([move[0], move[1]]);
       } else if (tile.side !== this.side) {
@@ -382,7 +389,8 @@ export class Vanguard extends Piece {
         }
       }
     }
-
+    console.log(firstMoveHor)
+    console.log(firstMoveVert)
     return moves;
   }
 }
