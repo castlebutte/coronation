@@ -36,7 +36,7 @@ export default function BoardDisp({ game }: { game: Game }) {
               key={`${i}-${j}`}
               onClick={clickHandlerCreator(i, j)}
             >
-              {!col?.side ? (
+              {col?.side ? (
                 col === null ? null : col.type === "pawn" ? (
                   <BlackPawn />
                 ) : col.type === "knight" ? (
