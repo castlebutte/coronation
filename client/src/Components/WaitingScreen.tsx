@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import { useState } from "react";
+import React, { useEffect } from "react";
 import socket from "../socket";
 import "./components.css";
 import { ReactComponent as Start } from "../Assets/start_button.svg";
@@ -17,6 +16,14 @@ export default function HomeScreen({
 }: {
   location: Location<Lobby>;
 }) {
+  useEffect(() => {
+    socket.on("start", (game: Game) => {
+      history.push({ pathname: "/game", state: game });
+    });
+    return () => {
+      socket.off("start");
+    };
+  }, []);
   const history = useHistory();
   const lobby = location.state;
 

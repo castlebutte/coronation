@@ -92,5 +92,7 @@ io.on("connection", (socket: Socket) => {
     const code = getCode(socket);
     if (!gameExists(code)) return;
     makeMove(code, move);
+    const { board } = games[code] as Game;
+    socket.emit("move", board.arr);
   });
 });
