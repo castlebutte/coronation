@@ -1,5 +1,5 @@
 import { Board, Game, Piece } from "../types.d";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createPiece } from "../Pieces";
 
 import { ReactComponent as BlackBishop } from "../Assets/gamepieces/black_bishop.svg";
@@ -35,6 +35,11 @@ function clearSelected(arr: Board["arr"]) {
 export default function BoardDisp({ game }: { game: Game }) {
   const [selected, setSelected] = useState<Piece | null>(null);
   const [arr, setArr] = useState(game.board.arr);
+  useEffect(() => {
+    socket.on("move", (arr: Board["arr"]) => {
+      setArr(arr);
+    });
+  }, [setArr]);
   const clickHandlerCreator = (row: number, col: number) => () => {
     let piece = game.board.arr[row][col];
     if (piece == null) return;
@@ -52,8 +57,6 @@ export default function BoardDisp({ game }: { game: Game }) {
       setSelected(null);
       return;
     }
-    console.log({ row, row1: selected?.position[0] });
-    console.log({ col, col1: selected?.position[1] });
     if (row === selected?.position[0] && col === selected?.position[1]) {
       console.log("same");
     } else {
@@ -61,11 +64,8 @@ export default function BoardDisp({ game }: { game: Game }) {
       const newArr = clearSelected(arr);
       const moves = piece.checkMoves(game.board);
       setArr(newArr);
-      console.log(piece);
-      console.log(moves);
       setSelected(piece);
       setArr((arr) => {
-        console.log(arr);
         let newArr = [...arr];
         moves.forEach((move) => {
           newArr[move[0]][move[1]] = {
