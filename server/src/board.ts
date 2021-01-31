@@ -21,6 +21,30 @@ function createArray<T>(len: number, itm: T): T[] {
   return arr2;
 }
 
+function createRow(arr: string, row: number, side: boolean) {
+  let rowPcs: Piece[] = [];
+  for (let i = 0; i < arr.length; i++) {
+    switch (arr.charAt(i)) {
+      case "R":
+        rowPcs.push(new Rook(row, i, side));
+        break;
+      case "k":
+        rowPcs.push(new Knight(row, i, side));
+        break;
+      case "K":
+        rowPcs.push(new King(row, i, side));
+        break;
+      case "B":
+        rowPcs.push(new Bishop(row, i, side));
+        break;
+      case "Q":
+        rowPcs.push(new Queen(row, i, side));
+        break;
+    }
+  }
+  return rowPcs;
+}
+
 /**
  * @param whiteCol the columns of the vanguards
  * @param blackCol the columns of the vanguards
@@ -44,190 +68,32 @@ export const newBoard = (
         : new Pawn(sizeBoard - 2, i, false)
     );
   }
-  if (sizeBoard == 10) {
-    return {
-      size: sizeBoard,
-      arr: [
-        [
-          new Rook(0, 0, true),
-          new Knight(0, 1, true),
-          new Knight(0, 2, true),
-          new Bishop(0, 3, true),
-          new Queen(0, 4, true),
-          new King(0, 5, true),
-          new Bishop(0, 6, true),
-          new Knight(0, 7, true),
-          new Knight(0, 8, true),
-          new Rook(0, 9, true),
-        ],
-        whitePawns,
-        ...createArray(6, createArray(10, null)),
-        blackPawns,
-        [
-          new Rook(0, 0, true),
-          new Knight(0, 1, true),
-          new Knight(0, 2, true),
-          new Bishop(0, 3, true),
-          new Queen(0, 4, true),
-          new King(0, 5, true),
-          new Bishop(0, 6, true),
-          new Knight(0, 7, true),
-          new Knight(0, 8, true),
-          new Rook(0, 9, true),
-        ],
-      ],
-    };
-  } else if (sizeBoard == 12) {
-    return {
-      size: sizeBoard,
-      arr: [
-        [
-          new Rook(0, 0, true),
-          new Knight(0, 1, true),
-          new Knight(0, 2, true),
-          new Bishop(0, 3, true),
-          new Bishop(0, 4, true),
-          new Queen(0, 5, true),
-          new King(0, 6, true),
-          new Bishop(0, 7, true),
-          new Bishop(0, 8, true),
-          new Knight(0, 9, true),
-          new Knight(0, 10, true),
-          new Rook(0, 11, true),
-        ],
-        whitePawns,
-        ...createArray(8, createArray(12, null)),
-        blackPawns,
-        [
-          new Rook(0, 0, false),
-          new Knight(0, 1, false),
-          new Knight(0, 2, false),
-          new Bishop(0, 3, false),
-          new Bishop(0, 4, false),
-          new Queen(0, 5, false),
-          new King(0, 6, false),
-          new Bishop(0, 7, false),
-          new Bishop(0, 8, false),
-          new Knight(0, 9, false),
-          new Knight(0, 10, false),
-          new Rook(0, 11, false),
-        ],
-      ],
-    };
-  } else if (sizeBoard == 14) {
-    return {
-      size: sizeBoard,
-      arr: [
-        [
-          new Rook(0, 0, true),
-          new Rook(0, 1, true),
-          new Knight(0, 2, true),
-          new Knight(0, 3, true),
-          new Bishop(0, 4, true),
-          new Bishop(0, 5, true),
-          new Queen(0, 6, true),
-          new King(0, 7, true),
-          new Bishop(0, 8, true),
-          new Bishop(0, 9, true),
-          new Knight(0, 10, true),
-          new Knight(0, 11, true),
-          new Rook(0, 11, true),
-          new Rook(0, 12, true),
-        ],
-        whitePawns,
-        ...createArray(10, createArray(14, null)),
-        blackPawns,
-        [
-          new Rook(0, 0, true),
-          new Rook(0, 1, true),
-          new Knight(0, 2, true),
-          new Knight(0, 3, true),
-          new Bishop(0, 4, true),
-          new Bishop(0, 5, true),
-          new Queen(0, 6, true),
-          new King(0, 7, true),
-          new Bishop(0, 8, true),
-          new Bishop(0, 9, true),
-          new Knight(0, 10, true),
-          new Knight(0, 11, true),
-          new Rook(0, 11, true),
-          new Rook(0, 12, true),
-        ],
-      ],
-    };
-  } else if (sizeBoard == 16) {
-    return {
-      size: sizeBoard,
-      arr: [
-        [
-          new Rook(0, 0, true),
-          new Rook(0, 1, true),
-          new Knight(0, 2, true),
-          new Knight(0, 3, true),
-          new Bishop(0, 4, true),
-          new Bishop(0, 5, true),
-          new Queen(0, 6, true),
-          new Queen(0, 7, true),
-          new King(0, 8, true),
-          new Queen(0, 9, true),
-          new Bishop(0, 10, true),
-          new Bishop(0, 11, true),
-          new Knight(0, 12, true),
-          new Knight(0, 13, true),
-          new Rook(0, 14, true),
-          new Rook(0, 15, true),
-        ],
-        whitePawns,
-        ...createArray(12, createArray(16, null)),
-        blackPawns,
-        [
-          new Rook(0, 0, true),
-          new Rook(0, 1, true),
-          new Knight(0, 2, true),
-          new Knight(0, 3, true),
-          new Bishop(0, 4, true),
-          new Bishop(0, 5, true),
-          new Queen(0, 6, true),
-          new Queen(0, 7, true),
-          new King(0, 8, true),
-          new Queen(0, 9, true),
-          new Bishop(0, 10, true),
-          new Bishop(0, 11, true),
-          new Knight(0, 12, true),
-          new Knight(0, 13, true),
-          new Rook(0, 14, true),
-          new Rook(0, 15, true),
-        ],
-      ],
-    };
-  } else {
-    return {
-      size: sizeBoard,
-      arr: [
-        [
-          new Rook(0, 0, true),
-          new Knight(0, 1, true),
-          new Bishop(0, 2, true),
-          new Queen(0, 3, true),
-          new King(0, 4, true),
-          new Bishop(0, 5, true),
-          new Knight(0, 6, true),
-          new Rook(0, 7, true),
-        ],
-        whitePawns,
-        ...createArray(4, createArray(8, null)),
-        blackPawns,
-        [
-          new Rook(7, 0, false),
-          new Knight(7, 1, false),
-          new Bishop(7, 2, false),
-          new Queen(7, 3, false),
-          new King(7, 4, false),
-          new Bishop(7, 5, false),
-          new Knight(7, 6, false),
-          new Rook(7, 7, false),
-        ],
-      ],
-    };
+  let row = "";
+  switch (sizeBoard) {
+    case 8:
+      row = "RkBQKBkR";
+      break;
+    case 10:
+      row = "kRkBQKBkRk";
+      break;
+    case 12:
+      row = "BkRkBQKBkRkB";
+      break;
+    case 14:
+      row = "RBkRkBQKBkRkBR";
+      break;
+    case 16:
+      row = "RBkRkBQQKQBkRkBR";
+      break;
   }
+  return {
+    size: sizeBoard,
+    arr: [
+      createRow(row.split("").reverse().join(), 0, true),
+      whitePawns,
+      ...createArray(sizeBoard - 4, createArray(sizeBoard, null)),
+      blackPawns,
+      createRow(row, sizeBoard - 2, false),
+    ],
+  };
 };
