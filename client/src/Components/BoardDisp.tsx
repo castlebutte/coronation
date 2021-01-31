@@ -18,16 +18,39 @@ import { ReactComponent as WhitePawn } from "../Assets/gamepieces/white_pawn.svg
 import { ReactComponent as WhiteQueen } from "../Assets/gamepieces/white_queen.svg";
 import { ReactComponent as WhiteRook } from "../Assets/gamepieces/white_rook.svg";
 import { ReactComponent as WhiteVanguard } from "../Assets/gamepieces/white_vanguard.svg";
+import socket from "../socket";
 
 export default function BoardDisp({ game }: { game: Game }) {
+  const [selected, setSelected] = useState<Piece | null>(null);
   const [arr, setArr] = useState(game.board.arr);
   const clickHandlerCreator = (row: number, col: number) => () => {
     let piece = game.board.arr[row][col];
     if (piece == null) return;
+    if (piece.type === "selected" && selected) {
+      const oldPos = selected.position;
+      const newPos = [row, col];
+      socket.emit("move", { oldPos, newPos });
+      selected.move(row, col);
+      setArr((arr) => {
+        let newArr = [...arr];
+        newArr[oldPos[0]][oldPos[1]] = null;
+        newArr[newPos[0]][newPos[1]] = selected;
+        newArr.forEach((row, i) => {
+          row.forEach((col, j) => {
+            if (col?.type === "selected") {
+              newArr[i][j] = null;
+            }
+          });
+        });
+        return newArr;
+      });
+      setSelected(null);
+    }
     piece = createPiece(piece);
     console.log(piece);
     const moves = piece.checkMoves(game.board);
     console.log(moves);
+    setSelected(piece);
     setArr((arr) => {
       console.log(arr);
       let newArr = [...arr];
