@@ -226,9 +226,17 @@ export class Pawn extends Piece {
         moves.push([move[0], move[1]]);
       } else if (tile.side !== this.side) {
         if (board.arr[move[0]][move[1] + 1]?.side !== this.side) {
-          moves.push([move[0], move[1] + 1]);
+          if (move[1] + 1 >= board.size) {
+            return;
+          } else {
+            moves.push([move[0], move[1] + 1]);
+          }
         } else if (board.arr[move[0]][move[1] - 1]?.side !== this.side) {
-          moves.push([move[0], move[1] - 1]);
+          if (move[1] - 1 < 0) {
+            return;
+          } else {
+            moves.push([move[0], move[1] - 1]);
+          }
         }
       }
     });
