@@ -33,7 +33,7 @@ export default function HostJoinScreen() {
       <div className="inputField">
         <input
           placeholder="Enter a game code: "
-          type="number"
+          type="text"
           value={code}
           onChange={codeHandler}
         />
