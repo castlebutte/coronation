@@ -89,7 +89,7 @@ export const newBoard = (
   return {
     size: sizeBoard,
     arr: [
-      createRow(row.split("").reverse().join(), 0, true),
+      createRow(row, 0, true),
       whitePawns,
       ...createArray(sizeBoard - 4, createArray(sizeBoard, null)),
       blackPawns,
