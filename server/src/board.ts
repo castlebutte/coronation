@@ -1,13 +1,4 @@
-import {
-  Piece,
-  Vanguard,
-  King,
-  Bishop,
-  Knight,
-  Queen,
-  Pawn,
-  Rook,
-} from "./Pieces";
+import { Piece } from "./Pieces";
 import { Board, BoardSize } from "../../types";
 
 function createArray<T>(len: number, itm: T): T[] {
@@ -26,19 +17,19 @@ function createRow(arr: string, row: number, side: boolean) {
   for (let i = 0; i < arr.length; i++) {
     switch (arr.charAt(i)) {
       case "R":
-        rowPcs.push(new Rook(row, i, side));
+        rowPcs.push(new Piece(row, i, side, "rook"));
         break;
       case "k":
-        rowPcs.push(new Knight(row, i, side));
+        rowPcs.push(new Piece(row, i, side, "knight"));
         break;
       case "K":
-        rowPcs.push(new King(row, i, side));
+        rowPcs.push(new Piece(row, i, side, "king"));
         break;
       case "B":
-        rowPcs.push(new Bishop(row, i, side));
+        rowPcs.push(new Piece(row, i, side, "bishop"));
         break;
       case "Q":
-        rowPcs.push(new Queen(row, i, side));
+        rowPcs.push(new Piece(row, i, side, "queen"));
         break;
     }
   }
@@ -57,15 +48,17 @@ export const newBoard = (
   const whitePawns: Piece[] = [];
   for (let i = 0; i < sizeBoard; ++i) {
     whitePawns.push(
-      whiteCol.includes(i) ? new Vanguard(1, i, true) : new Pawn(1, i, true)
+      whiteCol.includes(i)
+        ? new Piece(1, i, true, "vanguard")
+        : new Piece(1, i, true, "pawn")
     );
   }
   const blackPawns: Piece[] = [];
   for (let i = 0; i < sizeBoard; ++i) {
     blackPawns.push(
       blackCol.includes(i)
-        ? new Vanguard(sizeBoard - 2, i, false)
-        : new Pawn(sizeBoard - 2, i, false)
+        ? new Piece(sizeBoard - 2, i, false, "vanguard")
+        : new Piece(sizeBoard - 2, i, false, "pawn")
     );
   }
   let row = "";
