@@ -225,7 +225,7 @@ export class Pawn extends Piece {
       if (tile) {
         options.pop();
         options.pop();
-      } else if ( tile) {
+      } else if (tile) {
         options.pop();
       }
 
@@ -245,7 +245,7 @@ export class Pawn extends Piece {
               }
             }
           }
-        } 
+        }
       }
     });
     return moves;
@@ -390,8 +390,8 @@ export class Vanguard extends Piece {
         }
       }
     }
-    console.log(firstMoveHor)
-    console.log(firstMoveVert)
+    console.log(firstMoveHor);
+    console.log(firstMoveVert);
     return moves;
   }
 }
