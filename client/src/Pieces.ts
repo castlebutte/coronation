@@ -260,8 +260,106 @@ const moves: MoveObj = {
     }
 
     return moves;
-  },
-  rook: function (piece: Piece, board: Board) {
+  }
+}
+// this one actually works as intended
+export class Pawn extends Piece {
+  constructor(row: number, col: number, side: boolean) {
+    super(row, col, side, "pawn");
+  }
+  checkMoves(board: Board) {
+    // check all directions
+    const options: MoveArr = [
+      [this.position[0] + (this.side ? 1 : -1), this.position[1]],
+      [this.position[0] + (this.side ? 2 : -2), this.position[1]],
+      [this.position[0] + (this.side ? 3 : -3), this.position[1]],
+    ];
+    const moves: MoveArr = [];
+    options.forEach((move) => {
+      if (
+        move[0] < 0 ||
+        move[0] >= board.size ||
+        move[1] < 0 ||
+        move[1] >= board.size
+      )
+        return;
+      const tile = board.arr[move[0]][move[1]];
+      if (tile) {
+        options.pop();
+        options.pop();
+      } else if ( tile) {
+        options.pop();
+      }
+
+      if (tile === null) {
+        moves.push([move[0], move[1]]);
+      } else if (tile.side !== this.side) {
+        if (board.arr[move[0]][move[1] + 1]?.side !== this.side) {
+          if (move[1] + 1 >= board.size) {
+            return;
+          } else {
+            moves.push([move[0], move[1] + 1]);
+            if (board.arr[move[0]][move[1] - 1]?.side !== this.side) {
+              if (move[1] - 1 < 0) {
+                return;
+              } else {
+                moves.push([move[0], move[1] - 1]);
+              }
+            }
+          }
+        } 
+      }
+    });
+    return moves;
+  }
+}
+
+export class King extends Piece {
+  constructor(row: number, col: number, side: boolean) {
+    super(row, col, side, "king");
+  }
+  checkMoves(board: Board) {
+    // check all directions
+    const options: MoveArr = [
+      [this.position[0] - 1, this.position[1] - 1],
+      [this.position[0] - 1, this.position[1]],
+      [this.position[0] - 1, this.position[1] + 1],
+      [this.position[0], this.position[1] - 1],
+      [this.position[0], this.position[1] + 1],
+      [this.position[0] + 1, this.position[1] - 1],
+      [this.position[0] + 1, this.position[1]],
+      [this.position[0] + 1, this.position[1] + 1],
+    ];
+    const moves: MoveArr = options.filter((move) => {
+      if (
+        move[0] < 0 ||
+        move[0] >= board.size ||
+        move[1] < 0 ||
+        move[1] >= board.size
+      )
+        return false;
+      const tile = board.arr[move[0]][move[1]];
+      return tile === null || tile.side !== this.side;
+    });
+    return moves;
+  }
+}
+
+export class Queen extends Piece {
+  constructor(row: number, col: number, side: boolean) {
+    super(row, col, side, "queen");
+  }
+  checkMoves(board: Board) {
+    // bruh
+    return [];
+  }
+}
+
+export class Vanguard extends Piece {
+  constructor(row: number, col: number, side: boolean) {
+    super(row, col, side, "vanguard");
+  }
+  checkMoves(board: Board) {
     const moves: MoveArr = [];
     // do each direction
 

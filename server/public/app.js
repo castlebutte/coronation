@@ -1,4 +1,4 @@
-const socket = io("https://thyck.top/", {
+const socket = io("http://localhost:5002", {
   path: "/chess",
 });
 
