@@ -7,6 +7,7 @@ export type PieceType =
   | "king"
   | "vanguard"
   | "selected";
+
 export type MoveArr = [row: number, col: number][];
 export class Piece {
   type: PieceType;
@@ -14,38 +15,7 @@ export class Piece {
   side: boolean;
   constructor(row: number, col: number, side: boolean, type: PieceType);
   move(row: number, col: number): void;
-  checkMoves(board: Board): MoveArr {
-    return [];
-  }
-}
-export class Rook extends Piece {
-  constructor(row: number, col: number, side: boolean);
   checkMoves(board: Board): MoveArr;
-}
-export class Knight extends Piece {
-  constructor(row: number, col: number, side: boolean);
-  checkMoves(board: Board): never[];
-}
-export class Bishop extends Piece {
-  constructor(row: number, col: number, side: boolean);
-  bishopBounds(i: number, size: number): boolean;
-  checkMoves(board: Board): MoveArr;
-}
-export class Pawn extends Piece {
-  constructor(row: number, col: number, side: boolean);
-  checkMoves(board: Board): never[];
-}
-export class King extends Piece {
-  constructor(row: number, col: number, side: boolean);
-  checkMoves(board: Board): MoveArr;
-}
-export class Queen extends Piece {
-  constructor(row: number, col: number, side: boolean);
-  checkMoves(board: Board): never[];
-}
-export class Vanguard extends Piece {
-  constructor(row: number, col: number, side: boolean);
-  checkMoves(board: Board): never[];
 }
 
 export type BoardSize = 8 | 10 | 12 | 14 | 16;
